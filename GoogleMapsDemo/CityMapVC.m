@@ -14,6 +14,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSURLSession *markerSession;
 @property (strong, nonatomic) NSArray *steps;
+@property (strong, nonatomic) GMSMarker *currentMarker;
 
 @end
 
@@ -105,7 +106,7 @@
     marker1.title = @"Madison Square Garden";
     marker1.snippet = @"Where the Knicks play.";
     marker1.appearAnimation = kGMSMarkerAnimationPop;
-    marker1.map = nil;
+    marker1.map = self.mapView;
     
     // Create Freedom Tower marker
     GMSMarker *marker2 = [[GMSMarker alloc]init];
@@ -113,7 +114,7 @@
     marker2.title = @"Freedom Tower";
     marker2.snippet = @"Nuff' said.";
     marker2.appearAnimation = kGMSMarkerAnimationPop;
-    marker2.map = nil;
+    marker2.map = self.mapView;
     
     // Create Otto's marker
     GMSMarker *marker3 = [[GMSMarker alloc]init];
@@ -121,7 +122,7 @@
     marker3.title = @"Otto's Tacos";
     marker3.snippet = @"Best tacos in the city.";
     marker3.appearAnimation = kGMSMarkerAnimationPop;
-    marker3.map = nil;
+    marker3.map = self.mapView;
     
     // Create Halal Guys marker
     GMSMarker *marker4 = [[GMSMarker alloc]init];
@@ -129,11 +130,7 @@
     marker4.title = @"Halal Guys";
     marker4.snippet = @"Late night food.";
     marker4.appearAnimation = kGMSMarkerAnimationPop;
-    marker4.map = nil;
-    
-    self.myMarkers = [NSMutableSet setWithObjects:marker1, marker2, marker3, marker4, nil];
-    
-    [self drawAllMarkers];
+    marker4.map = self.mapView;
 }
 
 // Draw on map
@@ -174,7 +171,7 @@
     [infoWindow addSubview:title];
     
     UILabel *snippet = [[UILabel alloc] init];
-    snippet.frame = CGRectMake(14, 42, 175, 16);
+    snippet.frame = CGRectMake(14, 42, 175, 20);
     snippet.text = marker.snippet;
     snippet.textColor = [UIColor greenColor];
     [infoWindow addSubview:snippet];
@@ -185,20 +182,28 @@
 // Create marker where user long presses on map
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
+    // Remove current marker from map
+    if (self.currentMarker)
+    {
+        self.currentMarker.map = nil;
+        self.currentMarker = nil;
+    }
+
     [self.txtPinName resignFirstResponder];
     GMSGeocoder *geocoder = [[GMSGeocoder alloc]init];
     [geocoder reverseGeocodeCoordinate:coordinate completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error){
-        GMSMarker *marker = [[GMSMarker alloc]init];
-        marker.position = coordinate;
-        marker.appearAnimation = kGMSMarkerAnimationPop;
-        marker.map = nil;
-        marker.title = response.firstResult.thoroughfare;  // Street address
-        marker.snippet = response.firstResult.locality;    // City
+        self.currentMarker = [[GMSMarker alloc]init];
+        self.currentMarker.position = coordinate;
+        self.currentMarker.appearAnimation = kGMSMarkerAnimationPop;
+        self.currentMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+        self.currentMarker.map = nil;
+        self.currentMarker.title = response.firstResult.thoroughfare;  // Street address
+        self.currentMarker.snippet = response.firstResult.locality;    // City
 
-        [self drawMarker:marker];
+        [self drawMarker:self.currentMarker];
         
-        self.lblLatitude.text = [[NSNumber numberWithDouble:marker.position.latitude] stringValue];
-        self.lblLongitude.text = [[NSNumber numberWithDouble:marker.position.longitude] stringValue];
+        self.lblLatitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.latitude] stringValue];
+        self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
         NSString *addressFormat = [NSString stringWithFormat:@"%@,\n%@,\n%@", response.firstResult.thoroughfare, response.firstResult.locality, response.firstResult.administrativeArea];
         self.lblAddress.text = addressFormat;
     }];
@@ -227,4 +232,12 @@
     [self.txtPinName resignFirstResponder];
 }
 
+// Add to array
+- (IBAction)SavePin:(id)sender
+{
+    [self.myMarkers addObject:self.currentMarker];
+    self.currentMarker = nil;
+    
+    NSLog(@"Marker added to set. Set count is now: %lu", (unsigned long)self.myMarkers.count);
+}
 @end

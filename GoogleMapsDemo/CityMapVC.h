@@ -25,5 +25,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btnSavePin;
 @property (strong, nonatomic) IBOutlet UIButton *bntClear;
 
+- (IBAction)SavePin:(id)sender;
+
 @end
 

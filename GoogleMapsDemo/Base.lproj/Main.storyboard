@@ -86,6 +86,9 @@
                                         <state key="normal" title="Save Pin">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="SavePin:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="o9N-fj-tDt"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3S8-eh-wmG">
                                         <rect key="frame" x="197" y="244" width="37" height="30"/>
