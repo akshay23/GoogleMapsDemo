@@ -32,16 +32,23 @@
     
     // iOS 8 workaround to get current location
     self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
-    [self.locationManager startUpdatingLocation];
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+    if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+        authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse)
+    {
+        [self.locationManager startUpdatingLocation];
+    }
+    else
+    {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
     
     // Initialize google map view with camera position
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.729451
-                                                            longitude:-73.992041
-                                                                 zoom:14
-                                                              bearing:0
-                                                         viewingAngle:0];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.729451 longitude:-73.992041 zoom:14 bearing:0 viewingAngle:0];
     self.mapView = [GMSMapView mapWithFrame:self.mapContainerView.bounds camera:camera];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.myLocationEnabled = YES;
@@ -64,11 +71,8 @@
     [self.view addSubview:self.mapContainerView];
     [self.view addSubview:self.myScrollView];
     
-    // Hide keyboard
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
+    // Gesture recognizer to hide keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
 
@@ -222,35 +226,5 @@
 {
     [self.txtPinName resignFirstResponder];
 }
-
-// Get directions from my location to tapped marker
-//- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
-//{
-//    if (mapView.myLocation != nil)
-//    {
-//        NSString *urlString = [NSString stringWithFormat:
-//                               @"%@?origin=%f,%f&destination=%f,%f&sensor=true&key=%@",
-//                               @"https://maps.googleapis.com/maps/api/directions/json",
-//                               mapView.myLocation.coordinate.latitude,
-//                               mapView.myLocation.coordinate.longitude,
-//                               marker.position.latitude,
-//                               marker.position.longitude,
-//                               @""];
-//        NSURL *directionsURL = [NSURL URLWithString:urlString];
-//        NSURLSessionDataTask *dataTask = [self.markerSession dataTaskWithURL:directionsURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//            NSError *e = nil;
-//            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&e];
-//            
-//            if (!e)
-//            {
-//                self.steps = json[@"routes"][0][@"legs"][@"steps"];
-//            }
-//        }];
-//        
-//        NSLog(@"%@", dataTask.description);
-//    }
-//    
-//    return true;
-//}
 
 @end

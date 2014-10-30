@@ -12,7 +12,7 @@
 #import "PinDetailsTV.h"
 #import "GlobalData.h"
 
-@interface CityMapVC : UIViewController <GMSMapViewDelegate>
+@interface CityMapVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) NSMutableSet *myMarkers;
 @property (strong, nonatomic) IBOutlet UIView *mapContainerView;
