@@ -337,6 +337,7 @@
                      }];
 
     [self.savedPinsTVC setManagedObjectContext:self.managedObjectContext];
+    [self.txtPinName resignFirstResponder];
     [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
 }
 
