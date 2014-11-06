@@ -10,6 +10,10 @@
 
 @interface SavedPinsTVC ()
 
+@property BOOL searchControllerWasActive;
+@property BOOL searchControllerSearchFieldWasFirstResponder;
+@property (strong, nonatomic) UISearchController *searchController;
+
 @end
 
 @implementation SavedPinsTVC
@@ -27,7 +31,7 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Add custom left navi button
-    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
+    UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Back to Map" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
     [self.navigationItem setLeftBarButtonItem:left];
     
     NSError *error;
@@ -37,10 +41,44 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         exit(-1);  // Fail
     }
+    
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.delegate = self;
+    [self.searchController.searchBar sizeToFit];
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // restore the searchController's active state
+    if (self.searchControllerWasActive)
+    {
+        self.searchController.active = self.searchControllerWasActive;
+        self.searchControllerWasActive = NO;
+        
+        if (self.searchControllerSearchFieldWasFirstResponder)
+        {
+            [self.searchController.searchBar becomeFirstResponder];
+            self.searchControllerSearchFieldWasFirstResponder = NO;
+        }
+    }
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
+    [[self.fetchedResultsController fetchRequest] setEntity:entity];
+    
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
+    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
 }
 
 - (void)viewDidUnload
 {
+    //[NSFetchedResultsController deleteCacheWithName:@"Root"];
     self.fetchedResultsController = nil;
 }
 
@@ -82,7 +120,8 @@
     NSFetchedResultsController *theFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil
-                                                   cacheName:@"Root"];
+                                                   cacheName:nil];
+    
     self.fetchedResultsController = theFetchedResultsController;
     _fetchedResultsController.delegate = self;
     
@@ -227,6 +266,55 @@
 {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+#pragma mark - UISearchControllerDelegate
+
+- (void)willPresentSearchController:(UISearchController *)searchController {
+    //NSLog(@"willPresentSearchController");
+}
+
+- (void)didPresentSearchController:(UISearchController *)searchController {
+    //NSLog(@"didPresentSearchController");
+}
+
+- (void)willDismissSearchController:(UISearchController *)searchController {
+    //NSLog(@"willDismissSearchController");
+}
+
+- (void)didDismissSearchController:(UISearchController *)searchController {
+    //NSLog(@"didDismissSearchController");
+}
+
+#pragma - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    // Search text
+    NSString *searchText = searchController.searchBar.text;
+    
+    // strip out all the leading and trailing spaces
+    NSString *strippedStr = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", strippedStr];
+    //NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+    //[[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
+    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
+    [[self.fetchedResultsController fetchRequest] setPredicate:predicate];
+    
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    [self.tableView reloadData];
 }
 
 @end
