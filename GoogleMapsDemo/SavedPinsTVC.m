@@ -85,7 +85,9 @@
     
     MyPin *pin = [self.delegate.myMarkers objectAtIndex:indexPath.row];
     [cell.textLabel setText:pin.name];
-    NSString *addedOn = [[NSString alloc]initWithFormat:@"Added on: %@", pin.dateCreated];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateStyle:NSDateFormatterLongStyle]; // day, Full month and year
+    NSString *addedOn = [[NSString alloc]initWithFormat:@"Added on: %@", [df stringFromDate:pin.dateCreated]];
     [cell.detailTextLabel setText:addedOn];
     
     return cell;

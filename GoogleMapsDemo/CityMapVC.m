@@ -70,6 +70,9 @@
     self.btnSavePin.enabled = NO;
     self.bntClear.enabled = NO;
     
+    // Add action for Done button
+    [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
     // Storyboard
     if (![GlobalData getInstance].mainStoryboard)
     {
@@ -288,6 +291,7 @@
     }
 }
 
+// Clear fields
 - (IBAction)ClearInfo:(id)sender
 {
     if (self.currentMarker)
@@ -303,6 +307,12 @@
 
     self.btnSavePin.enabled = NO;
     self.bntClear.enabled = NO;
+}
+
+// Hide keyboard when 'Done' is tapped
+- (void)textFieldFinished:(id)sender
+{
+    [sender resignFirstResponder];
 }
 
 // Move to next view to see saved pins
