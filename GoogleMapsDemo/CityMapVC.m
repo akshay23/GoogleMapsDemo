@@ -69,6 +69,8 @@
     self.bntClear.layer.borderColor = [UIColor blueColor].CGColor;
     self.btnSavePin.enabled = NO;
     self.bntClear.enabled = NO;
+    self.appDelegate = [[UIApplication sharedApplication] delegate];
+    self.managedObjectContext = [self.appDelegate managedObjectContext];
     
     // Add action for Done button
     [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -87,7 +89,6 @@
     [self.mapView setMinZoom:8 maxZoom:18];
     
     // Set up the markers
-    self.myMarkers = [[NSMutableArray alloc]init];
     [self setupMarkers];
     
     // Add views to main view
@@ -161,15 +162,6 @@
     if (!marker.map)
     {
         marker.map = self.mapView;
-    }
-}
-
-// Draw markers on the map
-- (void)drawAllMarkers
-{
-    for (GMSMarker *m in self.myMarkers)
-    {
-        [self drawMarker:m];
     }
 }
 
@@ -268,7 +260,7 @@
                                           longitude:[NSNumber numberWithDouble:self.currentMarker.position.longitude]
                                             address:self.currentAddress];
         
-        [self.myMarkers addObject:pin];
+        [self SaveToCoreData:pin];
         self.currentMarker.map = nil;
         self.currentMarker = nil;
         self.currentAddress = nil;
@@ -283,11 +275,30 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
         [alert show];
         
-        NSLog(@"Pin added to set. Array count is now: %lu", (unsigned long)self.myMarkers.count);
+        NSLog(@"Pin added to set.");
     }
     else
     {
         NSLog(@"Pin was not added to array.");
+    }
+}
+
+// Save to CoreData
+- (void)SaveToCoreData:(MyPin *)pin
+{
+    NSEntityDescription *entityList = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
+    NSManagedObject *newPin = [[NSManagedObject alloc] initWithEntity:entityList insertIntoManagedObjectContext:self.managedObjectContext];
+    [newPin setValue:pin.name forKey:@"name"];
+    [newPin setValue:pin.address forKey:@"address"];
+    [newPin setValue:pin.dateCreated forKey:@"dateCreated"];
+    [newPin setValue:pin.latitude forKey:@"latitude"];
+    [newPin setValue:pin.longitude forKey:@"longitude"];
+    
+     NSError *error = nil;
+    if (![newPin.managedObjectContext save:&error])
+    {
+        NSLog(@"Unable to save new pin.");
+        NSLog(@"%@, %@", error, error.localizedDescription);
     }
 }
 
@@ -324,7 +335,8 @@
                          [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
                          [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
                      }];
-    
+
+    [self.savedPinsTVC setManagedObjectContext:self.managedObjectContext];
     [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
 }
 

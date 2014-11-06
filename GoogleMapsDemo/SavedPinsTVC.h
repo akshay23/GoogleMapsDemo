@@ -11,8 +11,10 @@
 
 @class CityMapVC;
 
-@interface SavedPinsTVC : UITableViewController
+@interface SavedPinsTVC : UITableViewController <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) CityMapVC *delegate;
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 @end
