@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import "PinDetailsTV.h"
 #import "GlobalData.h"
+#import "MyPin.h"
+#import "SavedPinsTVC.h"
 
 @interface CityMapVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
 
-@property (strong, nonatomic) NSMutableSet *myMarkers;
+@property (strong, nonatomic) NSMutableArray *myMarkers;
 @property (strong, nonatomic) IBOutlet UIView *mapContainerView;
 @property (strong, nonatomic) IBOutlet UIView *tableContainerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
@@ -26,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *bntClear;
 
 - (IBAction)SavePin:(id)sender;
+- (IBAction)ClearInfo:(id)sender;
 
 @end
 

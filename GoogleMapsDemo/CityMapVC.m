@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSURLSession *markerSession;
 @property (strong, nonatomic) NSArray *steps;
 @property (strong, nonatomic) GMSMarker *currentMarker;
+@property (strong, nonatomic) NSString *currentAddress;
+@property (strong, nonatomic) SavedPinsTVC *savedPinsTVC;
 
 @end
 
@@ -56,14 +58,33 @@
     self.mapView.settings.myLocationButton = YES; // Doesnt work in iOS 8 yet
     self.mapView.delegate = self;
     
-    // Address label stuff
+    // Address label and button stuff
     self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
     self.lblAddress.numberOfLines = 4;
+    self.btnSavePin.layer.cornerRadius = 4;
+    self.btnSavePin.layer.borderWidth = 1;
+    self.btnSavePin.layer.borderColor = [UIColor blueColor].CGColor;
+    self.bntClear.layer.cornerRadius = 4;
+    self.bntClear.layer.borderWidth = 1;
+    self.bntClear.layer.borderColor = [UIColor blueColor].CGColor;
+    self.btnSavePin.enabled = NO;
+    self.bntClear.enabled = NO;
+    
+    // Storyboard
+    if (![GlobalData getInstance].mainStoryboard)
+    {
+        // Instantiate new main storyboard instance
+        [GlobalData getInstance].mainStoryboard = self.storyboard;
+        NSLog(@"mainStoryboard instantiated");
+    }
+    self.savedPinsTVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"savedPinsTVC"];
+    self.savedPinsTVC.delegate = self;
     
     // Set min and max zoom
     [self.mapView setMinZoom:8 maxZoom:18];
     
     // Set up the markers
+    self.myMarkers = [[NSMutableArray alloc]init];
     [self setupMarkers];
     
     // Add views to main view
@@ -75,18 +96,16 @@
     // Gesture recognizer to hide keyboard
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    // Add bar button to nav bar
+    UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"View Saved Pins" style:UIBarButtonItemStylePlain target:self action:@selector(ViewSavedPins)];
+    self.navigationItem.rightBarButtonItem = right;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-// Hide top status bar
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
 }
 
 // Adjust padding for map view
@@ -206,6 +225,10 @@
         self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
         NSString *addressFormat = [NSString stringWithFormat:@"%@,\n%@,\n%@", response.firstResult.thoroughfare, response.firstResult.locality, response.firstResult.administrativeArea];
         self.lblAddress.text = addressFormat;
+        self.currentAddress = addressFormat;
+        self.btnSavePin.enabled = YES;
+        self.bntClear.enabled = YES;
+        self.txtPinName.text = @"";
     }];
 }
 
@@ -235,9 +258,64 @@
 // Add to array
 - (IBAction)SavePin:(id)sender
 {
-    [self.myMarkers addObject:self.currentMarker];
-    self.currentMarker = nil;
-    
-    NSLog(@"Marker added to set. Set count is now: %lu", (unsigned long)self.myMarkers.count);
+    if (![self.txtPinName.text isEqualToString:@""] && self.currentMarker)
+    {
+        MyPin *pin = [[MyPin alloc] initWithDetails:self.txtPinName.text
+                                           latitude:[NSNumber numberWithDouble:self.currentMarker.position.latitude]
+                                          longitude:[NSNumber numberWithDouble:self.currentMarker.position.longitude]
+                                            address:self.currentAddress];
+        
+        [self.myMarkers addObject:pin];
+        self.currentMarker.map = nil;
+        self.currentMarker = nil;
+        self.currentAddress = nil;
+        self.txtPinName.text = @"";
+        self.lblAddress.text = @"";
+        self.lblLatitude.text = @"";
+        self.lblLongitude.text = @"";
+        self.btnSavePin.enabled = NO;
+        self.bntClear.enabled = NO;
+        [self.txtPinName resignFirstResponder];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        
+        NSLog(@"Pin added to set. Array count is now: %lu", (unsigned long)self.myMarkers.count);
+    }
+    else
+    {
+        NSLog(@"Pin was not added to array.");
+    }
 }
+
+- (IBAction)ClearInfo:(id)sender
+{
+    if (self.currentMarker)
+    {
+        self.currentMarker.map = nil;
+        self.currentMarker = nil;
+    }
+    
+    self.txtPinName.text = @"";
+    self.lblAddress.text = @"";
+    self.lblLatitude.text = @"";
+    self.lblLongitude.text = @"";
+
+    self.btnSavePin.enabled = NO;
+    self.bntClear.enabled = NO;
+}
+
+// Move to next view to see saved pins
+- (void)ViewSavedPins
+{
+    // Custom transition
+    [UIView animateWithDuration:0.75
+                     animations:^{
+                         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                     }];
+    
+    [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
+}
+
 @end

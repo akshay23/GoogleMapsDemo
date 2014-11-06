@@ -29,8 +29,9 @@
 		198D169319F194B200F35825 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D169219F194B200F35825 /* SystemConfiguration.framework */; };
 		198D169519F1990E00F35825 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D169419F1990E00F35825 /* GoogleMaps.framework */; };
 		198D169719F1995100F35825 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 198D169619F1995100F35825 /* GoogleMaps.bundle */; };
-		19B0E50D1A02974400FEC9D2 /* PinDetailsTV.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E50C1A02974400FEC9D2 /* PinDetailsTV.m */; };
 		19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E50F1A02997B00FEC9D2 /* GlobalData.m */; };
+		19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5121A03CB5200FEC9D2 /* MyPin.m */; };
+		19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,10 +73,12 @@
 		198D169219F194B200F35825 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		198D169419F1990E00F35825 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		198D169619F1995100F35825 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
-		19B0E50B1A02974400FEC9D2 /* PinDetailsTV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsTV.h; sourceTree = "<group>"; };
-		19B0E50C1A02974400FEC9D2 /* PinDetailsTV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsTV.m; sourceTree = "<group>"; };
 		19B0E50E1A02997B00FEC9D2 /* GlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalData.h; sourceTree = "<group>"; };
 		19B0E50F1A02997B00FEC9D2 /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
+		19B0E5111A03CB5200FEC9D2 /* MyPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPin.h; sourceTree = "<group>"; };
+		19B0E5121A03CB5200FEC9D2 /* MyPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPin.m; sourceTree = "<group>"; };
+		19B0E5141A03E80B00FEC9D2 /* SavedPinsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedPinsTVC.h; sourceTree = "<group>"; };
+		19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedPinsTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,10 +143,12 @@
 				198D166219F1914000F35825 /* LaunchScreen.xib */,
 				198D165719F1914000F35825 /* GoogleMapsDemo.xcdatamodeld */,
 				198D165019F1914000F35825 /* Supporting Files */,
-				19B0E50B1A02974400FEC9D2 /* PinDetailsTV.h */,
-				19B0E50C1A02974400FEC9D2 /* PinDetailsTV.m */,
 				19B0E50E1A02997B00FEC9D2 /* GlobalData.h */,
 				19B0E50F1A02997B00FEC9D2 /* GlobalData.m */,
+				19B0E5111A03CB5200FEC9D2 /* MyPin.h */,
+				19B0E5121A03CB5200FEC9D2 /* MyPin.m */,
+				19B0E5141A03E80B00FEC9D2 /* SavedPinsTVC.h */,
+				19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */,
 			);
 			path = GoogleMapsDemo;
 			sourceTree = "<group>";
@@ -296,11 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */,
+				19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */,
 				19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */,
 				198D165619F1914000F35825 /* AppDelegate.m in Sources */,
 				198D165919F1914000F35825 /* GoogleMapsDemo.xcdatamodeld in Sources */,
 				198D165C19F1914000F35825 /* CityMapVC.m in Sources */,
-				19B0E50D1A02974400FEC9D2 /* PinDetailsTV.m in Sources */,
 				198D165319F1914000F35825 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
