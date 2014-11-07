@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1946739A1A0D39200079D686 /* GoogleMaps.framework */; };
+		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
 		198D165619F1914000F35825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165519F1914000F35825 /* AppDelegate.m */; };
 		198D165919F1914000F35825 /* GoogleMapsDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 198D165719F1914000F35825 /* GoogleMapsDemo.xcdatamodeld */; };
@@ -45,6 +47,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1946739A1A0D39200079D686 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsVC.h; sourceTree = "<group>"; };
+		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
 		198D164D19F1914000F35825 /* GoogleMapsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleMapsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		198D165119F1914000F35825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		198D165219F1914000F35825 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 				198D168919F1947500F35825 /* libc++.dylib in Frameworks */,
 				198D168719F1946800F35825 /* ImageIO.framework in Frameworks */,
 				198D168519F1945C00F35825 /* GLKit.framework in Frameworks */,
+				1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */,
 				198D168319F1945700F35825 /* CoreText.framework in Frameworks */,
 				198D169519F1990E00F35825 /* GoogleMaps.framework in Frameworks */,
 				198D168119F1944F00F35825 /* CoreLocation.framework in Frameworks */,
@@ -149,6 +155,8 @@
 				19B0E5121A03CB5200FEC9D2 /* MyPin.m */,
 				19B0E5141A03E80B00FEC9D2 /* SavedPinsTVC.h */,
 				19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */,
+				1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */,
+				1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */,
 			);
 			path = GoogleMapsDemo;
 			sourceTree = "<group>";
@@ -182,6 +190,7 @@
 		198D167B19F1939000F35825 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1946739A1A0D39200079D686 /* GoogleMaps.framework */,
 				198D169619F1995100F35825 /* GoogleMaps.bundle */,
 				198D169419F1990E00F35825 /* GoogleMaps.framework */,
 				198D169219F194B200F35825 /* SystemConfiguration.framework */,
@@ -308,6 +317,7 @@
 				198D165919F1914000F35825 /* GoogleMapsDemo.xcdatamodeld in Sources */,
 				198D165C19F1914000F35825 /* CityMapVC.m in Sources */,
 				198D165319F1914000F35825 /* main.m in Sources */,
+				1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CityMapVC.h"
+#import "PinDetailsVC.h"
 
 @class CityMapVC;
 

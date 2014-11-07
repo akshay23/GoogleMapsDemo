@@ -170,6 +170,17 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyPin *pin = [_fetchedResultsController objectAtIndexPath:indexPath];
+    PinDetailsVC *pinDetailsVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"pinDetailsVC"];
+    pinDetailsVC.pinObject = pin;
+    
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.navigationController pushViewController:pinDetailsVC animated:YES];
+}
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -297,24 +308,24 @@
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    // Search text
-    NSString *searchText = searchController.searchBar.text;
-    
-    // strip out all the leading and trailing spaces
-    NSString *strippedStr = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", strippedStr];
-    //NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
-    //[[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
-    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
-    [[self.fetchedResultsController fetchRequest] setPredicate:predicate];
-    
-    NSError *error;
-    if (![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    }
-    
-    [self.tableView reloadData];
+//    // Search text
+//    NSString *searchText = searchController.searchBar.text;
+//    
+//    // strip out all the leading and trailing spaces
+//    NSString *strippedStr = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", strippedStr];
+//    //NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+//    //[[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
+//    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
+//    [[self.fetchedResultsController fetchRequest] setPredicate:predicate];
+//    
+//    NSError *error;
+//    if (![[self fetchedResultsController] performFetch:&error]) {
+//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//    }
+//    
+//    [self.tableView reloadData];
 }
 
 @end
