@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import "MyPin.h"
 
-@interface PinDetailsVC : UIViewController
+@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
+
 @property (strong, nonatomic) MyPin *pinObject;
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (strong, nonatomic) IBOutlet UILabel *lblPinName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitude;

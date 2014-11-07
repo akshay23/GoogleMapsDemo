@@ -12,7 +12,6 @@
 
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSURLSession *markerSession;
 @property (strong, nonatomic) NSArray *steps;
 @property (strong, nonatomic) GMSMarker *currentMarker;
 @property (strong, nonatomic) NSString *currentAddress;
@@ -26,14 +25,9 @@
 {
     [super viewDidLoad];
     
-    // Initialize NSURLRequest object for incoming network requests
-    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.URLCache = [[NSURLCache alloc] initWithMemoryCapacity:2 * 1024 * 1024
-                                                    diskCapacity:10 * 1024 * 1024
-                                                        diskPath:@"MarkerData"];
-    self.markerSession = [NSURLSession sessionWithConfiguration:config];
+    [self.view setAutoresizesSubviews:YES];
     
-    // iOS 8 workaround to get current location
+    // Get current location
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
@@ -51,7 +45,8 @@
     }
     
     // Initialize google map view with camera position
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.729451 longitude:-73.992041 zoom:14 bearing:0 viewingAngle:0];
+    self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.729451 longitude:-73.992041 zoom:16 bearing:0 viewingAngle:0];
     self.mapView = [GMSMapView mapWithFrame:self.mapContainerView.bounds camera:camera];
     self.mapView.mapType = kGMSTypeNormal;
     self.mapView.myLocationEnabled = YES;
@@ -93,9 +88,9 @@
     
     // Add views to main view
     [self.mapContainerView addSubview:self.mapView];
-    self.mapContainerView.frame = CGRectMake(0, 45, self.mapContainerView.frame.size.width, self.mapContainerView.frame.size.height);
     [self.view addSubview:self.mapContainerView];
     [self.view addSubview:self.myScrollView];
+    self.myScrollView.hidden = YES;
     
     // Gesture recognizer to hide keyboard
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -202,6 +197,13 @@
         self.currentMarker.map = nil;
         self.currentMarker = nil;
     }
+    
+    // Reduce map container height
+    self.mapContainerView.frame = CGRectMake(0, 45, self.mapContainerView.frame.size.width, 270);
+    self.mapView.frame = self.mapContainerView.bounds;
+    
+    // Unhide everything but the map
+    self.myScrollView.hidden = NO;
 
     [self.txtPinName resignFirstResponder];
     GMSGeocoder *geocoder = [[GMSGeocoder alloc]init];
@@ -240,7 +242,6 @@
 // Move scrollview up
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    
     self.myScrollView.contentOffset = CGPointMake(0, textField.frame.origin.y);
 }
 
@@ -261,6 +262,10 @@
                                             address:self.currentAddress];
         
         [self SaveToCoreData:pin];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        
         self.currentMarker.map = nil;
         self.currentMarker = nil;
         self.currentAddress = nil;
@@ -272,14 +277,21 @@
         self.bntClear.enabled = NO;
         [self.txtPinName resignFirstResponder];
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
-        [alert show];
+        // Hide everything but the map
+        self.myScrollView.hidden = YES;
+
+        // Increase map container height
+        self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+        self.mapView.frame = self.mapContainerView.bounds;
         
         NSLog(@"Pin added to set.");
     }
     else
     {
-        NSLog(@"Pin was not added to array.");
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Pin was NOT saved! Please enter a name." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+
+        NSLog(@"Pin was not added.");
     }
 }
 
@@ -318,6 +330,13 @@
 
     self.btnSavePin.enabled = NO;
     self.bntClear.enabled = NO;
+    
+    // Hide everything but the map
+    self.myScrollView.hidden = YES;
+
+    // Increase map container height
+    self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+    self.mapView.frame = self.mapContainerView.bounds;
 }
 
 // Hide keyboard when 'Done' is tapped

@@ -10,30 +10,60 @@
 
 @interface PinDetailsVC ()
 
+@property (strong, nonatomic) GMSMapView *mapView;
+
 @end
 
 @implementation PinDetailsVC
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // Address label and button stuff
+    self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
+    self.lblAddress.numberOfLines = 4;
+    self.btnDelete.layer.cornerRadius = 4;
+    self.btnDelete.layer.borderWidth = 1;
+    self.btnDelete.layer.borderColor = [UIColor blueColor].CGColor;
+    
+    // Set up Google Maps
+    // Initialize google map view with camera position
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.pinObject.latitude doubleValue] longitude:[self.pinObject.longitude doubleValue] zoom:16 bearing:0 viewingAngle:0];
+    self.mapView = [GMSMapView mapWithFrame:self.mapContainer.bounds camera:camera];
+    self.mapView.mapType = kGMSTypeNormal;
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.delegate = self;
+    [self.mapView setMinZoom:12 maxZoom:18];
+    
+    // Get the pin details
+    self.lblPinName.text = self.pinObject.name;
+    self.lblAddress.text = self.pinObject.address;
+    self.lblLatitude.text = [self.pinObject.latitude stringValue];
+    self.lblLongitude.text = [self.pinObject.longitude stringValue];
+    
+    // Add views to main view
+    [self.mapContainer addSubview:self.mapView];
+    self.mapContainer.frame = CGRectMake(0, self.mapContainer.frame.origin.y, self.mapContainer.frame.size.width, self.mapContainer.frame.size.height);
+    [self.view addSubview:self.mapContainer];
+    
+    // Create marker
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake([self.pinObject.latitude doubleValue], [self.pinObject.longitude doubleValue]);
+    marker.title = self.pinObject.name;
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.map = self.mapView;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)deletePin:(id)sender
+{
+    
 }
-*/
 
-- (IBAction)deletePin:(id)sender {
-}
 @end

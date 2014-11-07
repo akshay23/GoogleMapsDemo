@@ -29,6 +29,12 @@
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
+@property (strong, nonatomic) IBOutlet UILabel *lblPinNameTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblLatitudeTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblLongitudeTitle;
+@property (strong, nonatomic) IBOutlet UILabel *lblAddressTitle;
+
+
 - (IBAction)SavePin:(id)sender;
 - (IBAction)ClearInfo:(id)sender;
 

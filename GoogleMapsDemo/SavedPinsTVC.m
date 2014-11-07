@@ -80,6 +80,11 @@
 {
     //[NSFetchedResultsController deleteCacheWithName:@"Root"];
     self.fetchedResultsController = nil;
+    
+    if (self.tableView.editing)
+    {
+        [self.tableView setEditing:NO animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,6 +180,7 @@
     MyPin *pin = [_fetchedResultsController objectAtIndexPath:indexPath];
     PinDetailsVC *pinDetailsVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"pinDetailsVC"];
     pinDetailsVC.pinObject = pin;
+    pinDetailsVC.managedObjectContext = self.managedObjectContext;
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     

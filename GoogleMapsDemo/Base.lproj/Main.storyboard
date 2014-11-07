@@ -111,7 +111,7 @@
                                     </button>
                                 </subviews>
                             </scrollView>
-                            <containerView opaque="NO" contentMode="scaleToFill" id="VdQ-X4-dkE" userLabel="Map Container View">
+                            <containerView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" id="VdQ-X4-dkE" userLabel="Map Container View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="269"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </containerView>
@@ -123,8 +123,12 @@
                         <outlet property="bntClear" destination="3S8-eh-wmG" id="jFC-mN-oUl"/>
                         <outlet property="btnSavePin" destination="jN5-XS-eCF" id="dja-H0-3Ce"/>
                         <outlet property="lblAddress" destination="6Jj-6f-Jc2" id="ox8-Pr-SuM"/>
+                        <outlet property="lblAddressTitle" destination="Hw7-Tf-1UD" id="rhe-Hp-amH"/>
                         <outlet property="lblLatitude" destination="wlu-9x-Owk" id="MKB-bi-EP0"/>
+                        <outlet property="lblLatitudeTitle" destination="Lr1-un-qtd" id="PBl-EQ-BrR"/>
                         <outlet property="lblLongitude" destination="6xH-Ft-Wa8" id="0Jo-h8-XBF"/>
+                        <outlet property="lblLongitudeTitle" destination="JaF-IT-1ED" id="47b-FB-spP"/>
+                        <outlet property="lblPinNameTitle" destination="sbz-U7-ckd" id="RrB-hi-KAu"/>
                         <outlet property="mapContainerView" destination="VdQ-X4-dkE" id="TYh-Fz-TIG"/>
                         <outlet property="myScrollView" destination="fZy-II-hEM" id="9rB-9A-UJl"/>
                         <outlet property="txtPinName" destination="GYW-za-wbh" id="qOS-mL-F3M"/>
@@ -217,8 +221,36 @@
                                     <segue destination="Zor-yc-Zvn" kind="embed" id="wYo-lw-sbh"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tdx-jv-Iui">
+                                <rect key="frame" x="104" y="71" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qNk-pa-T2F">
+                                <rect key="frame" x="104" y="105" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2nx-XM-0hP">
+                                <rect key="frame" x="104" y="140" width="200" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sRW-VQ-v6h">
+                                <rect key="frame" x="96" y="174" width="194" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdl-3w-AMK">
-                                <rect key="frame" x="125" y="528" width="70" height="30"/>
+                                <rect key="frame" x="113" y="528" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Delete Pin">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -227,34 +259,6 @@
                                     <action selector="deletePin:" destination="ubg-Gs-Om0" eventType="touchUpInside" id="ElY-oz-7v5"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tdx-jv-Iui">
-                                <rect key="frame" x="104" y="71" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qNk-pa-T2F">
-                                <rect key="frame" x="104" y="105" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2nx-XM-0hP">
-                                <rect key="frame" x="104" y="140" width="160" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sRW-VQ-v6h">
-                                <rect key="frame" x="96" y="172" width="194" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
