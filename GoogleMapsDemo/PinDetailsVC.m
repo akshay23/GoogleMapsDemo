@@ -32,7 +32,7 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.pinObject.latitude doubleValue] longitude:[self.pinObject.longitude doubleValue] zoom:16 bearing:0 viewingAngle:0];
     self.mapView = [GMSMapView mapWithFrame:self.mapContainer.bounds camera:camera];
     self.mapView.mapType = kGMSTypeNormal;
-    self.mapView.myLocationEnabled = YES;
+    self.mapView.myLocationEnabled = NO;
     self.mapView.delegate = self;
     [self.mapView setMinZoom:12 maxZoom:18];
     
@@ -63,7 +63,26 @@
 
 - (IBAction)deletePin:(id)sender
 {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Confirm"
+                                                     message:@"Are you sure you want to delete this pin?"
+                                                    delegate:self
+                                           cancelButtonTitle:@"No"
+                                           otherButtonTitles:@"Yes", nil];
     
+    [alert show];
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:self.indexPathOfObject];
+        [self.fetchedResultsController.managedObjectContext deleteObject:managedObject];
+        [self.fetchedResultsController.managedObjectContext save:nil];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 
 @end

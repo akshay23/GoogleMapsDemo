@@ -180,7 +180,8 @@
     MyPin *pin = [_fetchedResultsController objectAtIndexPath:indexPath];
     PinDetailsVC *pinDetailsVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"pinDetailsVC"];
     pinDetailsVC.pinObject = pin;
-    pinDetailsVC.managedObjectContext = self.managedObjectContext;
+    pinDetailsVC.fetchedResultsController = self.fetchedResultsController;
+    pinDetailsVC.indexPathOfObject = indexPath;
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
