@@ -183,6 +183,9 @@
     pinDetailsVC.fetchedResultsController = self.fetchedResultsController;
     pinDetailsVC.indexPathOfObject = indexPath;
     
+    [[self.searchController searchBar] resignFirstResponder];
+    [self.view endEditing:TRUE];
+    
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
     [self.navigationController pushViewController:pinDetailsVC animated:YES];
@@ -295,44 +298,62 @@
 
 #pragma mark - UISearchControllerDelegate
 
-- (void)willPresentSearchController:(UISearchController *)searchController {
+- (void)willPresentSearchController:(UISearchController *)searchController
+{
     //NSLog(@"willPresentSearchController");
 }
 
-- (void)didPresentSearchController:(UISearchController *)searchController {
+- (void)didPresentSearchController:(UISearchController *)searchController
+{
     //NSLog(@"didPresentSearchController");
 }
 
-- (void)willDismissSearchController:(UISearchController *)searchController {
-    //NSLog(@"willDismissSearchController");
+- (void)willDismissSearchController:(UISearchController *)searchController
+{
+    NSError *error;
+    self.fetchedResultsController = nil;
+    if (![[self fetchedResultsController] performFetch:&error])
+    {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    NSLog(@"Num of items in result set: %lu", (unsigned long)[[self.fetchedResultsController fetchedObjects] count]);
+    
+    [self.tableView reloadData];
 }
 
-- (void)didDismissSearchController:(UISearchController *)searchController {
-    //NSLog(@"didDismissSearchController");
+- (void)didDismissSearchController:(UISearchController *)searchController
+{
 }
 
 #pragma - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-//    // Search text
-//    NSString *searchText = searchController.searchBar.text;
-//    
-//    // strip out all the leading and trailing spaces
-//    NSString *strippedStr = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name LIKE[c] %@", strippedStr];
-//    //NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
-//    //[[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
-//    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
-//    [[self.fetchedResultsController fetchRequest] setPredicate:predicate];
-//    
-//    NSError *error;
-//    if (![[self fetchedResultsController] performFetch:&error]) {
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//    }
-//    
-//    [self.tableView reloadData];
+    if (!searchController.isActive)
+        return;
+    
+    // Search text
+    NSString *searchText = searchController.searchBar.text;
+    
+    // strip out all the leading and trailing spaces
+    NSString *strippedStr = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+    [NSFetchedResultsController deleteCacheWithName:nil];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", strippedStr];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+    [[self.fetchedResultsController fetchRequest] setPredicate:predicate];
+    [[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
+    [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
+
+    NSError *error;
+    if (![self.fetchedResultsController performFetch:&error]) {
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    }
+    
+    NSLog(@"Num of items in result set: %lu", (unsigned long)[[self.fetchedResultsController fetchedObjects] count]);
+
+   [self.tableView reloadData];
 }
 
 @end
