@@ -1,6 +1,6 @@
 //
 //  main.m
-//  GoogleMapsDemo
+//  MyFavPins
 //
 //  Created by Akshay Bharath on 10/17/14.
 //  Copyright (c) 2014 Akshay Bharath. All rights reserved.

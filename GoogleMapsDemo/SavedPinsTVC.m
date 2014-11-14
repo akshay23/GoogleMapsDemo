@@ -1,6 +1,6 @@
 //
 //  SavedPinsTVC.m
-//  GoogleMapsDemo
+//  MyFavPins
 //
 //  Created by Akshay Bharath on 10/31/14.
 //  Copyright (c) 2014 Akshay Bharath. All rights reserved.
@@ -78,13 +78,14 @@
 
 - (void)viewDidUnload
 {
-    //[NSFetchedResultsController deleteCacheWithName:@"Root"];
     self.fetchedResultsController = nil;
     
     if (self.tableView.editing)
     {
         [self.tableView setEditing:NO animated:YES];
     }
+    
+    [super viewDidUnload];
 }
 
 - (void)didReceiveMemoryWarning

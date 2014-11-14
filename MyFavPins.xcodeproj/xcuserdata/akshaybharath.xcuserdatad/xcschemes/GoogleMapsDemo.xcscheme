@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "198D164C19F1913F00F35825"
-               BuildableName = "GoogleMapsDemo.app"
-               BlueprintName = "GoogleMapsDemo"
-               ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+               BuildableName = "MyFavPins.app"
+               BlueprintName = "MyFavPins"
+               ReferencedContainer = "container:MyFavPins.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -30,8 +30,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "198D166819F1914000F35825"
                BuildableName = "GoogleMapsDemoTests.xctest"
-               BlueprintName = "GoogleMapsDemoTests"
-               ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+               BlueprintName = "MyFavPinsTests"
+               ReferencedContainer = "container:MyFavPins.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,8 +48,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "198D166819F1914000F35825"
                BuildableName = "GoogleMapsDemoTests.xctest"
-               BlueprintName = "GoogleMapsDemoTests"
-               ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+               BlueprintName = "MyFavPinsTests"
+               ReferencedContainer = "container:MyFavPins.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "198D164C19F1913F00F35825"
-            BuildableName = "GoogleMapsDemo.app"
-            BlueprintName = "GoogleMapsDemo"
-            ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+            BuildableName = "MyFavPins.app"
+            BlueprintName = "MyFavPins"
+            ReferencedContainer = "container:MyFavPins.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "198D164C19F1913F00F35825"
-            BuildableName = "GoogleMapsDemo.app"
-            BlueprintName = "GoogleMapsDemo"
-            ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+            BuildableName = "MyFavPins.app"
+            BlueprintName = "MyFavPins"
+            ReferencedContainer = "container:MyFavPins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "198D164C19F1913F00F35825"
-            BuildableName = "GoogleMapsDemo.app"
-            BlueprintName = "GoogleMapsDemo"
-            ReferencedContainer = "container:GoogleMapsDemo.xcodeproj">
+            BuildableName = "MyFavPins.app"
+            BlueprintName = "MyFavPins"
+            ReferencedContainer = "container:MyFavPins.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  GoogleMapsDemo
+//  MyFavPins
 //
 //  Created by Akshay Bharath on 10/17/14.
 //  Copyright (c) 2014 Akshay Bharath. All rights reserved.
@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Google Maps API key
-    [GMSServices provideAPIKey:@"AIzaSyBt5TuGXnS38tfFzyb25VhoysuTLmQVE8M"];
+    [GMSServices provideAPIKey:@"AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc"];
     
     return YES;
 }
@@ -53,7 +53,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "actionman.GoogleMapsDemo" in the application's documents directory.
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "actionman.MyFavPins" in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
@@ -94,7 +94,6 @@
     
     return _persistentStoreCoordinator;
 }
-
 
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)

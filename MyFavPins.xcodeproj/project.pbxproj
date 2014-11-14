@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193B7DD61A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 193B7DD41A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld */; };
 		1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1946739A1A0D39200079D686 /* GoogleMaps.framework */; };
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
 		198D165619F1914000F35825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165519F1914000F35825 /* AppDelegate.m */; };
-		198D165919F1914000F35825 /* GoogleMapsDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 198D165719F1914000F35825 /* GoogleMapsDemo.xcdatamodeld */; };
 		198D165C19F1914000F35825 /* CityMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165B19F1914000F35825 /* CityMapVC.m */; };
 		198D165F19F1914000F35825 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 198D165D19F1914000F35825 /* Main.storyboard */; };
 		198D166119F1914000F35825 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 198D166019F1914000F35825 /* Images.xcassets */; };
 		198D166419F1914000F35825 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 198D166219F1914000F35825 /* LaunchScreen.xib */; };
-		198D167019F1914000F35825 /* GoogleMapsDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D166F19F1914000F35825 /* GoogleMapsDemoTests.m */; };
 		198D167D19F1944100F35825 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D167C19F1944100F35825 /* AVFoundation.framework */; };
 		198D167F19F1944B00F35825 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D167E19F1944B00F35825 /* CoreData.framework */; };
 		198D168119F1944F00F35825 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D168019F1944F00F35825 /* CoreLocation.framework */; };
@@ -35,34 +34,21 @@
 		19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		198D166A19F1914000F35825 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 198D164519F1913F00F35825 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 198D164C19F1913F00F35825;
-			remoteInfo = GoogleMapsDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		193B7DD51A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoogleMapsDemo.xcdatamodel; sourceTree = "<group>"; };
 		1946739A1A0D39200079D686 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsVC.h; sourceTree = "<group>"; };
 		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
-		198D164D19F1914000F35825 /* GoogleMapsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GoogleMapsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		198D164D19F1914000F35825 /* MyFavPins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFavPins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		198D165119F1914000F35825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		198D165219F1914000F35825 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		198D165419F1914000F35825 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		198D165519F1914000F35825 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		198D165819F1914000F35825 /* GoogleMapsDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoogleMapsDemo.xcdatamodel; sourceTree = "<group>"; };
 		198D165A19F1914000F35825 /* CityMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CityMapVC.h; sourceTree = "<group>"; };
 		198D165B19F1914000F35825 /* CityMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CityMapVC.m; sourceTree = "<group>"; };
 		198D165E19F1914000F35825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		198D166019F1914000F35825 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		198D166319F1914000F35825 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		198D166919F1914000F35825 /* GoogleMapsDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GoogleMapsDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		198D166E19F1914000F35825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		198D166F19F1914000F35825 /* GoogleMapsDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleMapsDemoTests.m; sourceTree = "<group>"; };
 		198D167C19F1944100F35825 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		198D167E19F1944B00F35825 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		198D168019F1944F00F35825 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -106,21 +92,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		198D166619F1914000F35825 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		198D164419F1913F00F35825 = {
 			isa = PBXGroup;
 			children = (
-				198D164F19F1914000F35825 /* GoogleMapsDemo */,
-				198D166C19F1914000F35825 /* GoogleMapsDemoTests */,
+				198D164F19F1914000F35825 /* MyFavPins */,
 				198D164E19F1914000F35825 /* Products */,
 				198D167B19F1939000F35825 /* Frameworks */,
 			);
@@ -129,13 +107,12 @@
 		198D164E19F1914000F35825 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				198D164D19F1914000F35825 /* GoogleMapsDemo.app */,
-				198D166919F1914000F35825 /* GoogleMapsDemoTests.xctest */,
+				198D164D19F1914000F35825 /* MyFavPins.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		198D164F19F1914000F35825 /* GoogleMapsDemo */ = {
+		198D164F19F1914000F35825 /* MyFavPins */ = {
 			isa = PBXGroup;
 			children = (
 				198D165419F1914000F35825 /* AppDelegate.h */,
@@ -145,7 +122,6 @@
 				198D165D19F1914000F35825 /* Main.storyboard */,
 				198D166019F1914000F35825 /* Images.xcassets */,
 				198D166219F1914000F35825 /* LaunchScreen.xib */,
-				198D165719F1914000F35825 /* GoogleMapsDemo.xcdatamodeld */,
 				198D165019F1914000F35825 /* Supporting Files */,
 				19B0E50E1A02997B00FEC9D2 /* GlobalData.h */,
 				19B0E50F1A02997B00FEC9D2 /* GlobalData.m */,
@@ -155,7 +131,9 @@
 				19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */,
 				1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */,
 				1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */,
+				193B7DD41A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld */,
 			);
+			name = MyFavPins;
 			path = GoogleMapsDemo;
 			sourceTree = "<group>";
 		};
@@ -164,23 +142,6 @@
 			children = (
 				198D165119F1914000F35825 /* Info.plist */,
 				198D165219F1914000F35825 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		198D166C19F1914000F35825 /* GoogleMapsDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				198D166F19F1914000F35825 /* GoogleMapsDemoTests.m */,
-				198D166D19F1914000F35825 /* Supporting Files */,
-			);
-			path = GoogleMapsDemoTests;
-			sourceTree = "<group>";
-		};
-		198D166D19F1914000F35825 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				198D166E19F1914000F35825 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -210,9 +171,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		198D164C19F1913F00F35825 /* GoogleMapsDemo */ = {
+		198D164C19F1913F00F35825 /* MyFavPins */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 198D167319F1914000F35825 /* Build configuration list for PBXNativeTarget "GoogleMapsDemo" */;
+			buildConfigurationList = 198D167319F1914000F35825 /* Build configuration list for PBXNativeTarget "MyFavPins" */;
 			buildPhases = (
 				198D164919F1913F00F35825 /* Sources */,
 				198D164A19F1913F00F35825 /* Frameworks */,
@@ -222,28 +183,10 @@
 			);
 			dependencies = (
 			);
-			name = GoogleMapsDemo;
+			name = MyFavPins;
 			productName = GoogleMapsDemo;
-			productReference = 198D164D19F1914000F35825 /* GoogleMapsDemo.app */;
+			productReference = 198D164D19F1914000F35825 /* MyFavPins.app */;
 			productType = "com.apple.product-type.application";
-		};
-		198D166819F1914000F35825 /* GoogleMapsDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 198D167619F1914000F35825 /* Build configuration list for PBXNativeTarget "GoogleMapsDemoTests" */;
-			buildPhases = (
-				198D166519F1914000F35825 /* Sources */,
-				198D166619F1914000F35825 /* Frameworks */,
-				198D166719F1914000F35825 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				198D166B19F1914000F35825 /* PBXTargetDependency */,
-			);
-			name = GoogleMapsDemoTests;
-			productName = GoogleMapsDemoTests;
-			productReference = 198D166919F1914000F35825 /* GoogleMapsDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -257,13 +200,9 @@
 					198D164C19F1913F00F35825 = {
 						CreatedOnToolsVersion = 6.0.1;
 					};
-					198D166819F1914000F35825 = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = 198D164C19F1913F00F35825;
-					};
 				};
 			};
-			buildConfigurationList = 198D164819F1913F00F35825 /* Build configuration list for PBXProject "GoogleMapsDemo" */;
+			buildConfigurationList = 198D164819F1913F00F35825 /* Build configuration list for PBXProject "MyFavPins" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -276,8 +215,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				198D164C19F1913F00F35825 /* GoogleMapsDemo */,
-				198D166819F1914000F35825 /* GoogleMapsDemoTests */,
+				198D164C19F1913F00F35825 /* MyFavPins */,
 			);
 		};
 /* End PBXProject section */
@@ -294,13 +232,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		198D166719F1914000F35825 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -310,32 +241,16 @@
 			files = (
 				19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */,
 				19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */,
+				193B7DD61A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld in Sources */,
 				19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */,
 				198D165619F1914000F35825 /* AppDelegate.m in Sources */,
-				198D165919F1914000F35825 /* GoogleMapsDemo.xcdatamodeld in Sources */,
 				198D165C19F1914000F35825 /* CityMapVC.m in Sources */,
 				198D165319F1914000F35825 /* main.m in Sources */,
 				1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		198D166519F1914000F35825 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				198D167019F1914000F35825 /* GoogleMapsDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		198D166B19F1914000F35825 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 198D164C19F1913F00F35825 /* GoogleMapsDemo */;
-			targetProxy = 198D166A19F1914000F35825 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		198D165D19F1914000F35825 /* Main.storyboard */ = {
@@ -445,7 +360,7 @@
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyFavPins;
 			};
 			name = Debug;
 		};
@@ -461,48 +376,14 @@
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		198D167719F1914000F35825 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GoogleMapsDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoogleMapsDemo.app/GoogleMapsDemo";
-			};
-			name = Debug;
-		};
-		198D167819F1914000F35825 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = GoogleMapsDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GoogleMapsDemo.app/GoogleMapsDemo";
+				PRODUCT_NAME = MyFavPins;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		198D164819F1913F00F35825 /* Build configuration list for PBXProject "GoogleMapsDemo" */ = {
+		198D164819F1913F00F35825 /* Build configuration list for PBXProject "MyFavPins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				198D167119F1914000F35825 /* Debug */,
@@ -511,7 +392,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		198D167319F1914000F35825 /* Build configuration list for PBXNativeTarget "GoogleMapsDemo" */ = {
+		198D167319F1914000F35825 /* Build configuration list for PBXNativeTarget "MyFavPins" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				198D167419F1914000F35825 /* Debug */,
@@ -520,24 +401,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		198D167619F1914000F35825 /* Build configuration list for PBXNativeTarget "GoogleMapsDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				198D167719F1914000F35825 /* Debug */,
-				198D167819F1914000F35825 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		198D165719F1914000F35825 /* GoogleMapsDemo.xcdatamodeld */ = {
+		193B7DD41A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				198D165819F1914000F35825 /* GoogleMapsDemo.xcdatamodel */,
+				193B7DD51A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodel */,
 			);
-			currentVersion = 198D165819F1914000F35825 /* GoogleMapsDemo.xcdatamodel */;
+			currentVersion = 193B7DD51A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodel */;
 			path = GoogleMapsDemo.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
