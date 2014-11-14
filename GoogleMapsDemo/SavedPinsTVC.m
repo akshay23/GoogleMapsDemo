@@ -184,6 +184,7 @@
     pinDetailsVC.indexPathOfObject = indexPath;
     
     [[self.searchController searchBar] resignFirstResponder];
+    [self.searchController setActive:NO];
     [self.view endEditing:TRUE];
     
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
