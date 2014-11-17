@@ -16,13 +16,15 @@
 @property (strong, nonatomic) MyPin *pinObject;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSIndexPath *indexPathOfObject;
-@property (strong, nonatomic) IBOutlet UILabel *lblPinName;
+@property (strong, nonatomic) IBOutlet UITextField *txtPinName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblAddress;
 @property (strong, nonatomic) IBOutlet UIView *mapContainer;
 @property (strong, nonatomic) IBOutlet UIButton *btnDelete;
+@property (strong, nonatomic) IBOutlet UIButton *btnSaveChanges;
 
 - (IBAction)deletePin:(id)sender;
+- (IBAction)saveChanges:(id)sender;
 
 @end

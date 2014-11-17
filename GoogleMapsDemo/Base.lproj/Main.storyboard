@@ -221,13 +221,6 @@
                                     <segue destination="Zor-yc-Zvn" kind="embed" id="wYo-lw-sbh"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tdx-jv-Iui">
-                                <rect key="frame" x="104" y="71" width="200" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.65518105140000005" green="0.43897843479999998" blue="0.87346031020000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qNk-pa-T2F">
                                 <rect key="frame" x="104" y="105" width="200" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -250,7 +243,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cdl-3w-AMK">
-                                <rect key="frame" x="113" y="528" width="94" height="30"/>
+                                <rect key="frame" x="184" y="528" width="94" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Delete Pin">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -259,16 +252,33 @@
                                     <action selector="deletePin:" destination="ubg-Gs-Om0" eventType="touchUpInside" id="ElY-oz-7v5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OFu-qS-tbA">
+                                <rect key="frame" x="36" y="528" width="124" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save Changes">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveChanges:" destination="ubg-Gs-Om0" eventType="touchUpInside" id="8EP-Lt-h5K"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="Pv5-4y-NcH">
+                                <rect key="frame" x="104" y="67" width="200" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnDelete" destination="cdl-3w-AMK" id="W8F-xb-0w6"/>
+                        <outlet property="btnSaveChanges" destination="OFu-qS-tbA" id="YPV-A9-JoR"/>
                         <outlet property="lblAddress" destination="sRW-VQ-v6h" id="MMP-9W-FvU"/>
                         <outlet property="lblLatitude" destination="qNk-pa-T2F" id="aX6-7H-CCY"/>
                         <outlet property="lblLongitude" destination="2nx-XM-0hP" id="CeL-o9-VHj"/>
-                        <outlet property="lblPinName" destination="Tdx-jv-Iui" id="rrQ-rP-KQS"/>
                         <outlet property="mapContainer" destination="4vP-hj-Slo" id="mbR-Fk-uxk"/>
+                        <outlet property="txtPinName" destination="Pv5-4y-NcH" id="vPh-qw-3tU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fVu-sL-GRe" userLabel="First Responder" sceneMemberID="firstResponder"/>

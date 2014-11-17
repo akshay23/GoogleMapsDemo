@@ -26,6 +26,9 @@
     self.btnDelete.layer.cornerRadius = 4;
     self.btnDelete.layer.borderWidth = 1;
     self.btnDelete.layer.borderColor = [UIColor blueColor].CGColor;
+    self.btnSaveChanges.layer.cornerRadius = 4;
+    self.btnSaveChanges.layer.borderWidth = 1;
+    self.btnSaveChanges.layer.borderColor = [UIColor blueColor].CGColor;
     
     // Set up Google Maps
     // Initialize google map view with camera position
@@ -35,9 +38,9 @@
     self.mapView.myLocationEnabled = NO;
     self.mapView.delegate = self;
     [self.mapView setMinZoom:12 maxZoom:18];
-    
+
     // Get the pin details
-    self.lblPinName.text = self.pinObject.name;
+    self.txtPinName.text = self.pinObject.name;
     self.lblAddress.text = self.pinObject.address;
     self.lblLatitude.text = [self.pinObject.latitude stringValue];
     self.lblLongitude.text = [self.pinObject.longitude stringValue];
@@ -53,6 +56,13 @@
     marker.title = self.pinObject.name;
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.map = self.mapView;
+    
+    // Add action for Done button
+    [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
+    
+    // Gesture recognizer to hide keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,6 +82,38 @@
     [alert show];
 }
 
+- (IBAction)saveChanges:(id)sender
+{
+    if (self.txtPinName.text && ![self.txtPinName.text isEqualToString:@""])
+    {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateCreated=%@", self.pinObject.dateCreated];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.fetchedResultsController.managedObjectContext];
+        [fetchRequest setEntity:entity];
+        [fetchRequest setPredicate:pred];
+        
+        NSError *error = nil;
+        NSArray *result = [self.fetchedResultsController.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        NSManagedObject *pin = (NSManagedObject *)[result objectAtIndex:0];
+        [pin setValue:self.txtPinName.text forKey:@"name"];
+        
+        NSError *saveError = nil;
+        if (![pin.managedObjectContext save:&saveError]) {
+            NSLog(@"Unable to save changes for pin.");
+            NSLog(@"%@, %@", saveError, saveError.localizedDescription);
+        }
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sucess!" message:@"Changes successfully saved." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Save!" message:@"Pin name cannot be empty" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1)
@@ -82,6 +124,18 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+// Hide keyboard when user taps something
+-(void)dismissKeyboard
+{
+    [self.txtPinName resignFirstResponder];
+}
+
+// Hide keyboard when 'Done' is tapped
+- (void)textFieldFinished:(id)sender
+{
+    [sender resignFirstResponder];
 }
 
 @end
