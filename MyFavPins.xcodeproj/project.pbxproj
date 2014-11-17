@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		193B7DD61A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 193B7DD41A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodeld */; };
+		193B7DD81A1A95B700DE8F03 /* gPin.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DD71A1A95B700DE8F03 /* gPin.jpeg */; };
+		193B7DDA1A1A967900DE8F03 /* gPin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DD91A1A967900DE8F03 /* gPin2.png */; };
+		193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DDB1A1A96E900DE8F03 /* gHeart.png */; };
 		1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1946739A1A0D39200079D686 /* GoogleMaps.framework */; };
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
@@ -36,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		193B7DD51A169FD000DE8F03 /* GoogleMapsDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GoogleMapsDemo.xcdatamodel; sourceTree = "<group>"; };
+		193B7DD71A1A95B700DE8F03 /* gPin.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gPin.jpeg; sourceTree = "<group>"; };
+		193B7DD91A1A967900DE8F03 /* gPin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gPin2.png; sourceTree = "<group>"; };
+		193B7DDB1A1A96E900DE8F03 /* gHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gHeart.png; sourceTree = "<group>"; };
 		1946739A1A0D39200079D686 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsVC.h; sourceTree = "<group>"; };
 		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
@@ -140,6 +146,9 @@
 		198D165019F1914000F35825 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				193B7DD91A1A967900DE8F03 /* gPin2.png */,
+				193B7DDB1A1A96E900DE8F03 /* gHeart.png */,
+				193B7DD71A1A95B700DE8F03 /* gPin.jpeg */,
 				198D165119F1914000F35825 /* Info.plist */,
 				198D165219F1914000F35825 /* main.m */,
 			);
@@ -199,6 +208,7 @@
 				TargetAttributes = {
 					198D164C19F1913F00F35825 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = VRYW4TD62Q;
 					};
 				};
 			};
@@ -227,7 +237,10 @@
 			files = (
 				198D165F19F1914000F35825 /* Main.storyboard in Resources */,
 				198D166419F1914000F35825 /* LaunchScreen.xib in Resources */,
+				193B7DD81A1A95B700DE8F03 /* gPin.jpeg in Resources */,
 				198D166119F1914000F35825 /* Images.xcassets in Resources */,
+				193B7DDA1A1A967900DE8F03 /* gPin2.png in Resources */,
+				193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */,
 				198D169719F1995100F35825 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +365,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMapsDemo",
@@ -368,6 +382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMapsDemo",
