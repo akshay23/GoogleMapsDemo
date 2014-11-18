@@ -63,6 +63,10 @@
     // Gesture recognizer to hide keyboard
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    // Add share button to right side of nav
+    UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleDone target:self action:@selector(sharePin)];
+    [self.navigationItem setRightBarButtonItem:share];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,6 +140,79 @@
 - (void)textFieldFinished:(id)sender
 {
     [sender resignFirstResponder];
+}
+
+// Show ActionSheet of share options
+- (void)sharePin
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share via" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Email", @"Facebook", @"Twitter", nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showInView:self.view];
+}
+
+// Compose new email to send
+- (void)composeEmail
+{
+    NSString *emailTitle = @"Check out this location";
+    NSString *messageBody = [NSString stringWithFormat:@"I wanted to share this location with you. Its one of my favourite ones on the map.\n\nName: %@\nLatitude: %@\nLongitude: %@\nAddress: %@",
+                             self.pinObject.name, self.pinObject.latitude, self.pinObject.longitude, self.pinObject.address];
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:YES];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+}
+
+#pragma mark UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)  // Email
+    {
+        NSLog(@"Share via Email");
+        
+        [self composeEmail];
+    }
+    else if (buttonIndex == 1) // Facebook
+    {
+        NSLog(@"Share via Facebook");
+        
+        // TODO
+    }
+    else if (buttonIndex == 2) // Twitter
+    {
+        NSLog(@"Share via Twitter");
+        
+        // TODO
+    }
+}
+
+#pragma mark MFMailComposeViewControllerDelegate delegate
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

@@ -13,6 +13,7 @@
 		193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DDB1A1A96E900DE8F03 /* gHeart.png */; };
 		1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1946739A1A0D39200079D686 /* GoogleMaps.framework */; };
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
+		1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1958804A1A1BD3F000F890FD /* MessageUI.framework */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
 		198D165619F1914000F35825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165519F1914000F35825 /* AppDelegate.m */; };
 		198D165C19F1914000F35825 /* CityMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165B19F1914000F35825 /* CityMapVC.m */; };
@@ -45,6 +46,7 @@
 		1946739A1A0D39200079D686 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsVC.h; sourceTree = "<group>"; };
 		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
+		1958804A1A1BD3F000F890FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		198D164D19F1914000F35825 /* MyFavPins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFavPins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		198D165119F1914000F35825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		198D165219F1914000F35825 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */,
 				198D169319F194B200F35825 /* SystemConfiguration.framework in Frameworks */,
 				198D169119F194A900F35825 /* QuartzCore.framework in Frameworks */,
 				198D168F19F1949C00F35825 /* OpenGLES.framework in Frameworks */,
@@ -158,6 +161,7 @@
 		198D167B19F1939000F35825 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1958804A1A1BD3F000F890FD /* MessageUI.framework */,
 				1946739A1A0D39200079D686 /* GoogleMaps.framework */,
 				198D169619F1995100F35825 /* GoogleMaps.bundle */,
 				198D169419F1990E00F35825 /* GoogleMaps.framework */,

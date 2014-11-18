@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <CoreData/CoreData.h>
+#import <MessageUI/MessageUI.h>
 #import "MyPin.h"
 
-@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
+@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) MyPin *pinObject;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
