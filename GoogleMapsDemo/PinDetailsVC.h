@@ -10,6 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <CoreData/CoreData.h>
 #import <MessageUI/MessageUI.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import "MyPin.h"
 
 @interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
