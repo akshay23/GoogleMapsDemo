@@ -154,8 +154,9 @@
 - (void)composeEmail
 {
     NSString *emailTitle = @"Check out this location";
-    NSString *messageBody = [NSString stringWithFormat:@"I wanted to share this location with you. Its one of my favourite ones on the map.\n\nName: %@\nLatitude: %@\nLongitude: %@\nAddress: %@",
-                             self.pinObject.name, self.pinObject.latitude, self.pinObject.longitude, self.pinObject.address];
+    NSString *imgTag = [NSString stringWithFormat:@"<img src=https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@>", self.pinObject.latitude, self.pinObject.longitude];
+    NSString *messageBody = [NSString stringWithFormat:@"<p>I wanted to share this location with you. Its one of my favourite ones on the map.</p><p><b>Name:</b> %@<br><b>Latitude:</b> %@<br><b>Longitude:</b> %@<br><b>Address:</b> %@</p>%@<p>I captured this location via the MyFavPins app.</p>",
+                             self.pinObject.name, self.pinObject.latitude, self.pinObject.longitude, self.pinObject.address, imgTag];
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;
     [mc setSubject:emailTitle];

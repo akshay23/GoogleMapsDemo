@@ -36,32 +36,7 @@
 		19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E50F1A02997B00FEC9D2 /* GlobalData.m */; };
 		19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5121A03CB5200FEC9D2 /* MyPin.m */; };
 		19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */; };
-		19F2F8A71A1CFF1B007482A0 /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F2F8A61A1CFF1B007482A0 /* WatchKit.framework */; };
-		19F2F8AE1A1CFF1B007482A0 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F2F8AD1A1CFF1B007482A0 /* InterfaceController.m */; };
-		19F2F8B11A1CFF1B007482A0 /* NotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F2F8B01A1CFF1B007482A0 /* NotificationController.m */; };
-		19F2F8B31A1CFF1B007482A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19F2F8B21A1CFF1B007482A0 /* Images.xcassets */; };
-		19F2F8B71A1CFF1B007482A0 /* MyFavPins Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 19F2F8B61A1CFF1B007482A0 /* MyFavPins Watch App.app */; };
-		19F2F8BE1A1CFF1B007482A0 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19F2F8BD1A1CFF1B007482A0 /* Interface.storyboard */; };
-		19F2F8C01A1CFF1B007482A0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19F2F8BF1A1CFF1B007482A0 /* Images.xcassets */; };
-		19F2F8C41A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19F2F8A51A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		19F2F8B81A1CFF1B007482A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 198D164519F1913F00F35825 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 19F2F8B51A1CFF1B007482A0;
-			remoteInfo = "MyFavPins Watch App";
-		};
-		19F2F8C11A1CFF1B007482A0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 198D164519F1913F00F35825 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 19F2F8A41A1CFF1B007482A0;
-			remoteInfo = "MyFavPins WatchKit Extension";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		19F2F8C31A1CFF1B007482A0 /* Embed App Extensions */ = {
@@ -70,7 +45,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				19F2F8C41A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,19 +90,7 @@
 		19B0E5121A03CB5200FEC9D2 /* MyPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPin.m; sourceTree = "<group>"; };
 		19B0E5141A03E80B00FEC9D2 /* SavedPinsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedPinsTVC.h; sourceTree = "<group>"; };
 		19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedPinsTVC.m; sourceTree = "<group>"; };
-		19F2F8A51A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "MyFavPins WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19F2F8A61A1CFF1B007482A0 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
-		19F2F8AA1A1CFF1B007482A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19F2F8AB1A1CFF1B007482A0 /* PushNotificationPayload.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PushNotificationPayload.json; sourceTree = "<group>"; };
-		19F2F8AC1A1CFF1B007482A0 /* InterfaceController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterfaceController.h; sourceTree = "<group>"; };
-		19F2F8AD1A1CFF1B007482A0 /* InterfaceController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterfaceController.m; sourceTree = "<group>"; };
-		19F2F8AF1A1CFF1B007482A0 /* NotificationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationController.h; sourceTree = "<group>"; };
-		19F2F8B01A1CFF1B007482A0 /* NotificationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationController.m; sourceTree = "<group>"; };
-		19F2F8B21A1CFF1B007482A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		19F2F8B61A1CFF1B007482A0 /* MyFavPins Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MyFavPins Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		19F2F8BC1A1CFF1B007482A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		19F2F8BD1A1CFF1B007482A0 /* Interface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Interface.storyboard; sourceTree = "<group>"; };
-		19F2F8BF1A1CFF1B007482A0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,14 +115,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		19F2F8A21A1CFF1B007482A0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				19F2F8A71A1CFF1B007482A0 /* WatchKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -168,8 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				198D164F19F1914000F35825 /* MyFavPins */,
-				19F2F8A81A1CFF1B007482A0 /* MyFavPins WatchKit Extension */,
-				19F2F8BA1A1CFF1B007482A0 /* MyFavPins Watch App */,
 				198D164E19F1914000F35825 /* Products */,
 				198D167B19F1939000F35825 /* Frameworks */,
 			);
@@ -179,8 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				198D164D19F1914000F35825 /* MyFavPins.app */,
-				19F2F8A51A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex */,
-				19F2F8B61A1CFF1B007482A0 /* MyFavPins Watch App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -246,46 +196,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		19F2F8A81A1CFF1B007482A0 /* MyFavPins WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				19F2F8AC1A1CFF1B007482A0 /* InterfaceController.h */,
-				19F2F8AD1A1CFF1B007482A0 /* InterfaceController.m */,
-				19F2F8AF1A1CFF1B007482A0 /* NotificationController.h */,
-				19F2F8B01A1CFF1B007482A0 /* NotificationController.m */,
-				19F2F8B21A1CFF1B007482A0 /* Images.xcassets */,
-				19F2F8A91A1CFF1B007482A0 /* Supporting Files */,
-			);
-			path = "MyFavPins WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		19F2F8A91A1CFF1B007482A0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				19F2F8AA1A1CFF1B007482A0 /* Info.plist */,
-				19F2F8AB1A1CFF1B007482A0 /* PushNotificationPayload.json */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		19F2F8BA1A1CFF1B007482A0 /* MyFavPins Watch App */ = {
-			isa = PBXGroup;
-			children = (
-				19F2F8BD1A1CFF1B007482A0 /* Interface.storyboard */,
-				19F2F8BF1A1CFF1B007482A0 /* Images.xcassets */,
-				19F2F8BB1A1CFF1B007482A0 /* Supporting Files */,
-			);
-			path = "MyFavPins Watch App";
-			sourceTree = "<group>";
-		};
-		19F2F8BB1A1CFF1B007482A0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				19F2F8BC1A1CFF1B007482A0 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,45 +211,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				19F2F8C21A1CFF1B007482A0 /* PBXTargetDependency */,
 			);
 			name = MyFavPins;
 			productName = GoogleMapsDemo;
 			productReference = 198D164D19F1914000F35825 /* MyFavPins.app */;
 			productType = "com.apple.product-type.application";
-		};
-		19F2F8A41A1CFF1B007482A0 /* MyFavPins WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 19F2F8CA1A1CFF1B007482A0 /* Build configuration list for PBXNativeTarget "MyFavPins WatchKit Extension" */;
-			buildPhases = (
-				19F2F8A11A1CFF1B007482A0 /* Sources */,
-				19F2F8A21A1CFF1B007482A0 /* Frameworks */,
-				19F2F8A31A1CFF1B007482A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				19F2F8B91A1CFF1B007482A0 /* PBXTargetDependency */,
-			);
-			name = "MyFavPins WatchKit Extension";
-			productName = "MyFavPins WatchKit Extension";
-			productReference = 19F2F8A51A1CFF1B007482A0 /* MyFavPins WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
-		};
-		19F2F8B51A1CFF1B007482A0 /* MyFavPins Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 19F2F8C91A1CFF1B007482A0 /* Build configuration list for PBXNativeTarget "MyFavPins Watch App" */;
-			buildPhases = (
-				19F2F8B41A1CFF1B007482A0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "MyFavPins Watch App";
-			productName = "MyFavPins Watch App";
-			productReference = 19F2F8B61A1CFF1B007482A0 /* MyFavPins Watch App.app */;
-			productType = "com.apple.product-type.application.watchapp";
 		};
 /* End PBXNativeTarget section */
 
@@ -353,13 +229,6 @@
 					198D164C19F1913F00F35825 = {
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = VRYW4TD62Q;
-					};
-					19F2F8A41A1CFF1B007482A0 = {
-						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = VRYW4TD62Q;
-					};
-					19F2F8B51A1CFF1B007482A0 = {
-						CreatedOnToolsVersion = 6.2;
 					};
 				};
 			};
@@ -377,8 +246,6 @@
 			projectRoot = "";
 			targets = (
 				198D164C19F1913F00F35825 /* MyFavPins */,
-				19F2F8A41A1CFF1B007482A0 /* MyFavPins WatchKit Extension */,
-				19F2F8B51A1CFF1B007482A0 /* MyFavPins Watch App */,
 			);
 		};
 /* End PBXProject section */
@@ -395,24 +262,6 @@
 				193B7DDA1A1A967900DE8F03 /* gPin2.png in Resources */,
 				193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */,
 				198D169719F1995100F35825 /* GoogleMaps.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		19F2F8A31A1CFF1B007482A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				19F2F8B31A1CFF1B007482A0 /* Images.xcassets in Resources */,
-				19F2F8B71A1CFF1B007482A0 /* MyFavPins Watch App.app in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		19F2F8B41A1CFF1B007482A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				19F2F8BE1A1CFF1B007482A0 /* Interface.storyboard in Resources */,
-				19F2F8C01A1CFF1B007482A0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,29 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		19F2F8A11A1CFF1B007482A0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				19F2F8B11A1CFF1B007482A0 /* NotificationController.m in Sources */,
-				19F2F8AE1A1CFF1B007482A0 /* InterfaceController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		19F2F8B91A1CFF1B007482A0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 19F2F8B51A1CFF1B007482A0 /* MyFavPins Watch App */;
-			targetProxy = 19F2F8B81A1CFF1B007482A0 /* PBXContainerItemProxy */;
-		};
-		19F2F8C21A1CFF1B007482A0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 19F2F8A41A1CFF1B007482A0 /* MyFavPins WatchKit Extension */;
-			targetProxy = 19F2F8C11A1CFF1B007482A0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		198D165D19F1914000F35825 /* Main.storyboard */ = {
@@ -512,7 +339,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -547,7 +374,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -565,6 +392,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MyFavPins;
@@ -582,71 +410,10 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MyFavPins;
-			};
-			name = Release;
-		};
-		19F2F8C51A1CFF1B007482A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "MyFavPins WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		19F2F8C61A1CFF1B007482A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = "MyFavPins WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		19F2F8C71A1CFF1B007482A0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				IBSC_MODULE = MyFavPins_WatchKit_Extension;
-				INFOPLIST_FILE = "MyFavPins Watch App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
-			};
-			name = Debug;
-		};
-		19F2F8C81A1CFF1B007482A0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				IBSC_MODULE = MyFavPins_WatchKit_Extension;
-				INFOPLIST_FILE = "MyFavPins Watch App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
 			};
 			name = Release;
 		};
@@ -670,22 +437,6 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
-		};
-		19F2F8C91A1CFF1B007482A0 /* Build configuration list for PBXNativeTarget "MyFavPins Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				19F2F8C71A1CFF1B007482A0 /* Debug */,
-				19F2F8C81A1CFF1B007482A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		19F2F8CA1A1CFF1B007482A0 /* Build configuration list for PBXNativeTarget "MyFavPins WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				19F2F8C51A1CFF1B007482A0 /* Debug */,
-				19F2F8C61A1CFF1B007482A0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
