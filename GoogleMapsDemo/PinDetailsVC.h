@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 #import <MessageUI/MessageUI.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <Twitter/Twitter.h>
 #import "MyPin.h"
 
 @interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>

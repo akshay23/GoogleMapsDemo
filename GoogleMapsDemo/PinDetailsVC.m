@@ -154,9 +154,10 @@
 - (void)composeEmail
 {
     NSString *emailTitle = @"Check out this location";
+    NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
     NSString *imgTag = [NSString stringWithFormat:@"<img src=https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@>", self.pinObject.latitude, self.pinObject.longitude];
-    NSString *messageBody = [NSString stringWithFormat:@"<p>I wanted to share this location with you. Its one of my favourite ones on the map.</p><p><b>Name:</b> %@<br><b>Latitude:</b> %@<br><b>Longitude:</b> %@<br><b>Address:</b> %@</p>%@<p>I captured this location via the MyFavPins app.</p>",
-                             self.pinObject.name, self.pinObject.latitude, self.pinObject.longitude, self.pinObject.address, imgTag];
+    NSString *messageBody = [NSString stringWithFormat:@"<p>I wanted to share this location with you. Its one of my favourite ones on the map.</p><p><b>Name:</b> %@<br><b>Latitude:</b> %@<br><b>Longitude:</b> %@<br><b>Address:</b> %@</p><a href=\"%@\">%@</a><p>I captured this location via the MyFavPins iPhone app.</p>",
+                             self.pinObject.name, self.pinObject.latitude, self.pinObject.longitude, self.pinObject.address, pinURL, imgTag];
     MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
     mc.mailComposeDelegate = self;
     [mc setSubject:emailTitle];
@@ -247,6 +248,12 @@
     return urlWasHandled;
 }
 
+// Create new Twitter post
+- (void)createTweet
+{
+    
+}
+
 // A function for parsing URL parameters returned by the Feed Dialog.
 - (NSDictionary*)parseURLParams:(NSString *)query
 {
@@ -282,7 +289,7 @@
     {
         NSLog(@"Share via Twitter");
         
-        // TODO
+        [self createTweet];
     }
 }
 
