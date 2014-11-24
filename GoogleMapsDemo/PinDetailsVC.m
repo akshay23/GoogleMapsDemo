@@ -194,7 +194,7 @@
         // Present the feed dialog
         // Put together the dialog parameters
         NSMutableDictionary *paramms = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"Check out this cool location!", @"name",
+                                       @"Check out this cool location!!", @"name",
                                        self.pinObject.name, @"caption",
                                        @"This is one of my favourite locations on a map.", @"description",
                                        pinURL, @"link",
@@ -251,7 +251,29 @@
 // Create new Twitter post
 - (void)createTweet
 {
-    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
+    {
+        SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        NSString *tweetFormatted = [NSString stringWithFormat:@"Check out this cool location: %@. #MyFavPinsApp", self.pinObject.name];
+        NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
+        NSURL *staticImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@", self.pinObject.latitude, self.pinObject.longitude]];
+        UIImage *mapImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:staticImageURL]];
+        [tweetSheet setInitialText:tweetFormatted];
+        [tweetSheet addURL:[NSURL URLWithString:pinURL]];
+        [tweetSheet addImage:mapImage];
+        
+        [self presentViewController:tweetSheet animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Twitter Login"
+                                                         message:@"Please login to Twitter on your phone first, then try again."
+                                                        delegate:self
+                                               cancelButtonTitle:@"Ok"
+                                               otherButtonTitles:nil];
+        
+        [alert show];
+    }
 }
 
 // A function for parsing URL parameters returned by the Feed Dialog.

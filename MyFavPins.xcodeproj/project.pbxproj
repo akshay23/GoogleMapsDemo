@@ -15,7 +15,6 @@
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1958804A1A1BD3F000F890FD /* MessageUI.framework */; };
 		1959C1D61A1D3DAA00873FF9 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */; };
-		1959C1D81A1E5FEF00873FF9 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1959C1D71A1E5FEF00873FF9 /* Twitter.framework */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
 		198D165619F1914000F35825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165519F1914000F35825 /* AppDelegate.m */; };
 		198D165C19F1914000F35825 /* CityMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165B19F1914000F35825 /* CityMapVC.m */; };
@@ -38,6 +37,7 @@
 		19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E50F1A02997B00FEC9D2 /* GlobalData.m */; };
 		19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5121A03CB5200FEC9D2 /* MyPin.m */; };
 		19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */; };
+		19C113D61A23C6D800912D2D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19C113D51A23C6D800912D2D /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +95,7 @@
 		19B0E5121A03CB5200FEC9D2 /* MyPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPin.m; sourceTree = "<group>"; };
 		19B0E5141A03E80B00FEC9D2 /* SavedPinsTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedPinsTVC.h; sourceTree = "<group>"; };
 		19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedPinsTVC.m; sourceTree = "<group>"; };
+		19C113D51A23C6D800912D2D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		19F2F8A61A1CFF1B007482A0 /* WatchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchKit.framework; path = System/Library/Frameworks/WatchKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -103,7 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1959C1D81A1E5FEF00873FF9 /* Twitter.framework in Frameworks */,
+				19C113D61A23C6D800912D2D /* Social.framework in Frameworks */,
 				1959C1D61A1D3DAA00873FF9 /* FacebookSDK.framework in Frameworks */,
 				1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */,
 				198D169319F194B200F35825 /* SystemConfiguration.framework in Frameworks */,
@@ -182,6 +183,7 @@
 		198D167B19F1939000F35825 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19C113D51A23C6D800912D2D /* Social.framework */,
 				1959C1D71A1E5FEF00873FF9 /* Twitter.framework */,
 				1959C1D31A1D3DAA00873FF9 /* Bolts.framework */,
 				1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */,
