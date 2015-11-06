@@ -5,6 +5,7 @@ PODS:
     - Fabric/Base (= 1.6.0)
   - Fabric/Base (1.6.0)
   - FlatUIKit (1.6.2)
+  - GoogleMaps (1.10.5)
   - Hokusai (0.1.19)
   - MBProgressHUD (0.9.1)
 
@@ -12,6 +13,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - FlatUIKit
+  - GoogleMaps
   - Hokusai
   - MBProgressHUD
 
@@ -19,6 +21,7 @@ SPEC CHECKSUMS:
   Crashlytics: 1ee87895c37472eb3f01f409ea1654a464d2f8d4
   Fabric: d737eda3a26ac940a5430230eedb35f16b226131
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
+  GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
   Hokusai: 2b3a0c31bb2b1c2dbc9f39f2e94294697d69f8f2
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
 

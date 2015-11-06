@@ -7,6 +7,7 @@ pod 'FlatUIKit'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Hokusai'
+pod 'GoogleMaps'
 
 target 'MyFavPins' do
 

@@ -11,7 +11,6 @@
 		193B7DD81A1A95B700DE8F03 /* gPin.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DD71A1A95B700DE8F03 /* gPin.jpeg */; };
 		193B7DDA1A1A967900DE8F03 /* gPin2.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DD91A1A967900DE8F03 /* gPin2.png */; };
 		193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DDB1A1A96E900DE8F03 /* gHeart.png */; };
-		1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1946739A1A0D39200079D686 /* GoogleMaps.framework */; };
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1958804A1A1BD3F000F890FD /* MessageUI.framework */; };
 		1959C1D61A1D3DAA00873FF9 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */; };
@@ -33,7 +32,6 @@
 		198D168F19F1949C00F35825 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D168E19F1949C00F35825 /* OpenGLES.framework */; };
 		198D169119F194A900F35825 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D169019F194A900F35825 /* QuartzCore.framework */; };
 		198D169319F194B200F35825 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 198D169219F194B200F35825 /* SystemConfiguration.framework */; };
-		198D169719F1995100F35825 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 198D169619F1995100F35825 /* GoogleMaps.bundle */; };
 		19B0E5101A02997B00FEC9D2 /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E50F1A02997B00FEC9D2 /* GlobalData.m */; };
 		19B0E5131A03CB5200FEC9D2 /* MyPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5121A03CB5200FEC9D2 /* MyPin.m */; };
 		19B0E5161A03E80B00FEC9D2 /* SavedPinsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0E5151A03E80B00FEC9D2 /* SavedPinsTVC.m */; };
@@ -60,7 +58,6 @@
 		193B7DD71A1A95B700DE8F03 /* gPin.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gPin.jpeg; sourceTree = "<group>"; };
 		193B7DD91A1A967900DE8F03 /* gPin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gPin2.png; sourceTree = "<group>"; };
 		193B7DDB1A1A96E900DE8F03 /* gHeart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gHeart.png; sourceTree = "<group>"; };
-		1946739A1A0D39200079D686 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		1946739C1A0D3A7A0079D686 /* PinDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinDetailsVC.h; sourceTree = "<group>"; };
 		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
 		1958804A1A1BD3F000F890FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -89,8 +86,6 @@
 		198D168E19F1949C00F35825 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		198D169019F194A900F35825 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		198D169219F194B200F35825 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		198D169419F1990E00F35825 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		198D169619F1995100F35825 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		19B0E50E1A02997B00FEC9D2 /* GlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalData.h; sourceTree = "<group>"; };
 		19B0E50F1A02997B00FEC9D2 /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
 		19B0E5111A03CB5200FEC9D2 /* MyPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPin.h; sourceTree = "<group>"; };
@@ -119,7 +114,6 @@
 				198D168919F1947500F35825 /* libc++.dylib in Frameworks */,
 				198D168719F1946800F35825 /* ImageIO.framework in Frameworks */,
 				198D168519F1945C00F35825 /* GLKit.framework in Frameworks */,
-				1946739B1A0D39200079D686 /* GoogleMaps.framework in Frameworks */,
 				198D168319F1945700F35825 /* CoreText.framework in Frameworks */,
 				198D168119F1944F00F35825 /* CoreLocation.framework in Frameworks */,
 				198D167F19F1944B00F35825 /* CoreData.framework in Frameworks */,
@@ -194,9 +188,6 @@
 				1959C1D31A1D3DAA00873FF9 /* Bolts.framework */,
 				1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */,
 				1958804A1A1BD3F000F890FD /* MessageUI.framework */,
-				1946739A1A0D39200079D686 /* GoogleMaps.framework */,
-				198D169619F1995100F35825 /* GoogleMaps.bundle */,
-				198D169419F1990E00F35825 /* GoogleMaps.framework */,
 				198D169219F194B200F35825 /* SystemConfiguration.framework */,
 				198D169019F194A900F35825 /* QuartzCore.framework */,
 				198D168E19F1949C00F35825 /* OpenGLES.framework */,
@@ -292,7 +283,6 @@
 				198D166119F1914000F35825 /* Images.xcassets in Resources */,
 				193B7DDA1A1A967900DE8F03 /* gPin2.png in Resources */,
 				193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */,
-				198D169719F1995100F35825 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

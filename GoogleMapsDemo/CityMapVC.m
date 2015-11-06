@@ -27,6 +27,16 @@
   
   [self.view setAutoresizesSubviews:YES];
   
+  // Storyboard
+  if (![GlobalData getInstance].mainStoryboard)
+  {
+    // Instantiate new main storyboard instance
+    [GlobalData getInstance].mainStoryboard = self.storyboard;
+    NSLog(@"mainStoryboard instantiated");
+  }
+  self.savedPinsTVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"savedPinsTVC"];
+  self.savedPinsTVC.delegate = self;
+  
   // Get current location
   self.locationManager = [[CLLocationManager alloc] init];
   self.locationManager.delegate = self;
@@ -52,6 +62,7 @@
   self.mapView.myLocationEnabled = YES;
   self.mapView.settings.myLocationButton = YES; // Doesnt work in iOS 8 yet
   self.mapView.delegate = self;
+  [self.mapView setMinZoom:10 maxZoom:16];
   
   // Address label and button stuff
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
@@ -70,19 +81,6 @@
   // Add action for Done button
   [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
   
-  // Storyboard
-  if (![GlobalData getInstance].mainStoryboard)
-  {
-    // Instantiate new main storyboard instance
-    [GlobalData getInstance].mainStoryboard = self.storyboard;
-    NSLog(@"mainStoryboard instantiated");
-  }
-  self.savedPinsTVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"savedPinsTVC"];
-  self.savedPinsTVC.delegate = self;
-  
-  // Set min and max zoom
-  [self.mapView setMinZoom:8 maxZoom:18];
-  
   // Set up the markers
   [self setupMarkers];
   
@@ -90,7 +88,7 @@
   [self.mapContainerView addSubview:self.mapView];
   [self.view addSubview:self.mapContainerView];
   [self.view addSubview:self.myScrollView];
-  self.myScrollView.hidden = YES;
+  [self.myScrollView setHidden:YES];
   
   // Gesture recognizer to hide keyboard
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
