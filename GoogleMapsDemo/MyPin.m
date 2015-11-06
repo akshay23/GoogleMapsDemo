@@ -12,13 +12,13 @@
 
 - (id)initWithDetails:(NSString *)name latitude:(NSNumber *)lat longitude:(NSNumber *)longi address:(NSString *)theAddress
 {
-    self.name = name;
-    self.latitude = lat;
-    self.longitude = longi;
-    self.address = theAddress;
-    self.dateCreated = [NSDate date];
-
-    return self;
+  self.name = name;
+  self.latitude = lat;
+  self.longitude = longi;
+  self.address = theAddress;
+  self.dateCreated = [NSDate date];
+  
+  return self;
 }
 
 @end

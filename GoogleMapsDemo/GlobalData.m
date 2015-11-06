@@ -16,19 +16,19 @@ static GlobalData *instance;
 
 + (GlobalData *)getInstance
 {
-    @synchronized(self)
+  @synchronized(self)
+  {
+    if(instance==nil)
     {
-        if(instance==nil)
-        {
-            instance= [GlobalData new];
-        }
+      instance= [GlobalData new];
     }
-    return instance;
+  }
+  return instance;
 }
 
 + (BOOL)stringIsNilOrEmpty:(NSString*)aString
 {
-    return !(aString && aString.length);
+  return !(aString && aString.length);
 }
 
 @end
