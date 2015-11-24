@@ -58,9 +58,6 @@
   // Add action for Done button
   [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
   
-  // Set up the markers
-  [self setupMarkers];
-  
   // Gesture recognizer to hide keyboard
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
   [self.view addGestureRecognizer:tap];
@@ -83,12 +80,15 @@
     [self.locationManager requestWhenInUseAuthorization];
   }
   
-  self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
   self.mainMapView.mapType = kGMSTypeNormal;
   self.mainMapView.myLocationEnabled = YES;
   self.mainMapView.settings.myLocationButton = YES;
   self.mainMapView.delegate = self;
   [self.mainMapView setMinZoom:10 maxZoom:16];
+  
+  // Hide text controls
+  [self.mapBottomConstraint setConstant:40];
+  [self.myScrollView setHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -103,51 +103,6 @@
   [super viewWillLayoutSubviews];
   
   self.mapView.padding = UIEdgeInsetsMake(self.topLayoutGuide.length + 50, 0, self.bottomLayoutGuide.length + 30, 0);
-}
-
-// Create markers
-- (void)setupMarkers
-{
-  // Create MSG marker
-  GMSMarker *marker1 = [[GMSMarker alloc]init];
-  marker1.position = CLLocationCoordinate2DMake(40.750382, -73.993285);
-  marker1.title = @"Madison Square Garden";
-  marker1.snippet = @"Where the Knicks play.";
-  marker1.appearAnimation = kGMSMarkerAnimationPop;
-  marker1.map = self.mapView;
-  
-  // Create Freedom Tower marker
-  GMSMarker *marker2 = [[GMSMarker alloc]init];
-  marker2.position = CLLocationCoordinate2DMake(40.713008, -74.013169);
-  marker2.title = @"Freedom Tower";
-  marker2.snippet = @"Nuff' said.";
-  marker2.appearAnimation = kGMSMarkerAnimationPop;
-  marker2.map = self.mapView;
-  
-  // Create Otto's marker
-  GMSMarker *marker3 = [[GMSMarker alloc]init];
-  marker3.position = CLLocationCoordinate2DMake(40.729125, -73.987529);
-  marker3.title = @"Otto's Tacos";
-  marker3.snippet = @"Best tacos in the city.";
-  marker3.appearAnimation = kGMSMarkerAnimationPop;
-  marker3.map = self.mapView;
-  
-  // Create Halal Guys marker
-  GMSMarker *marker4 = [[GMSMarker alloc]init];
-  marker4.position = CLLocationCoordinate2DMake(40.761788, -73.979084);
-  marker4.title = @"Halal Guys";
-  marker4.snippet = @"Late night food.";
-  marker4.appearAnimation = kGMSMarkerAnimationPop;
-  marker4.map = self.mapView;
-}
-
-// Draw on map
-- (void)drawMarker:(GMSMarker *)marker
-{
-  if (!marker.map)
-  {
-    marker.map = self.mapView;
-  }
 }
 
 // Clear marker from map
@@ -207,7 +162,7 @@
   }
   
   // Reduce map container height
-  self.mainMapView.frame = CGRectMake(0, 45, self.mainMapView.frame.size.width, 270);
+  [self.mapBottomConstraint setConstant:self.view.frame.size.height / 2];
   
   // Unhide everything but the map
   self.myScrollView.hidden = NO;
@@ -219,12 +174,12 @@
     self.currentMarker.position = coordinate;
     self.currentMarker.appearAnimation = kGMSMarkerAnimationPop;
     self.currentMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
-    self.currentMarker.map = nil;
+    self.currentMarker.map = self.mainMapView;
     self.currentMarker.title = response.firstResult.thoroughfare;  // Street address
     self.currentMarker.snippet = response.firstResult.locality;    // City
     
-    [self drawMarker:self.currentMarker];
-    
+    [self.mainMapView animateToLocation:coordinate];
+
     self.lblLatitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.latitude] stringValue];
     self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
     NSString *addressFormat = [NSString stringWithFormat:@"%@,\n%@,\n%@", response.firstResult.thoroughfare, response.firstResult.locality, response.firstResult.administrativeArea];
@@ -288,7 +243,7 @@
     self.myScrollView.hidden = YES;
     
     // Increase map container height
-    self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+    [self.mapBottomConstraint setConstant:40];
     
     NSLog(@"Pin added to set.");
   }
@@ -341,7 +296,7 @@
   self.myScrollView.hidden = YES;
   
   // Increase map container height
-  self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+  [self.mapBottomConstraint setConstant:40];
 }
 
 // Hide keyboard when 'Done' is tapped

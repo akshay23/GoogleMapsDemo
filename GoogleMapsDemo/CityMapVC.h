@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitudeTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitudeTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblAddressTitle;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *mapBottomConstraint;
 
 
 - (IBAction)SavePin:(id)sender;
