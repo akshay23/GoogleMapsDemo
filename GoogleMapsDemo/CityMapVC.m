@@ -25,8 +25,6 @@
 {
   [super viewDidLoad];
   
-  [self.view setAutoresizesSubviews:YES];
-  
   // Storyboard
   if (![GlobalData getInstance].mainStoryboard)
   {
@@ -42,27 +40,6 @@
   self.locationManager.delegate = self;
   self.locationManager.distanceFilter = kCLDistanceFilterNone;
   self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-  
-  CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
-  if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
-      authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse)
-  {
-    [self.locationManager startUpdatingLocation];
-  }
-  else
-  {
-    [self.locationManager requestWhenInUseAuthorization];
-  }
-  
-  // Initialize google map view with camera position
-  self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
-  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.729451 longitude:-73.992041 zoom:16 bearing:0 viewingAngle:0];
-  self.mapView = [GMSMapView mapWithFrame:self.mapContainerView.bounds camera:camera];
-  self.mapView.mapType = kGMSTypeNormal;
-  self.mapView.myLocationEnabled = YES;
-  self.mapView.settings.myLocationButton = YES; // Doesnt work in iOS 8 yet
-  self.mapView.delegate = self;
-  [self.mapView setMinZoom:10 maxZoom:16];
   
   // Address label and button stuff
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
@@ -84,12 +61,6 @@
   // Set up the markers
   [self setupMarkers];
   
-  // Add views to main view
-  [self.mapContainerView addSubview:self.mapView];
-  [self.view addSubview:self.mapContainerView];
-  [self.view addSubview:self.myScrollView];
-  [self.myScrollView setHidden:YES];
-  
   // Gesture recognizer to hide keyboard
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
   [self.view addGestureRecognizer:tap];
@@ -97,6 +68,27 @@
   // Add bar button to nav bar
   UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"View Saved Pins" style:UIBarButtonItemStylePlain target:self action:@selector(ViewSavedPins)];
   self.navigationItem.rightBarButtonItem = right;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
+  if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
+      authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse)
+  {
+    [self.locationManager startUpdatingLocation];
+  }
+  else
+  {
+    [self.locationManager requestWhenInUseAuthorization];
+  }
+  
+  self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
+  self.mainMapView.mapType = kGMSTypeNormal;
+  self.mainMapView.myLocationEnabled = YES;
+  self.mainMapView.settings.myLocationButton = YES;
+  self.mainMapView.delegate = self;
+  [self.mainMapView setMinZoom:10 maxZoom:16];
 }
 
 - (void)didReceiveMemoryWarning
@@ -186,6 +178,24 @@
   return infoWindow;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+  if (status == kCLAuthorizationStatusAuthorizedAlways ||
+      status == kCLAuthorizationStatusAuthorizedWhenInUse)
+  {
+    [manager startUpdatingLocation];
+  }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+  NSLog(@"Stopped updating location");
+  [manager stopUpdatingLocation];
+  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locations.firstObject.coordinate.latitude
+                                longitude:locations.firstObject.coordinate.longitude zoom:16 bearing:0 viewingAngle:0];
+  [self.mainMapView animateToCameraPosition:camera];
+}
+
 // Create marker where user long presses on map
 - (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
 {
@@ -197,8 +207,7 @@
   }
   
   // Reduce map container height
-  self.mapContainerView.frame = CGRectMake(0, 45, self.mapContainerView.frame.size.width, 270);
-  self.mapView.frame = self.mapContainerView.bounds;
+  self.mainMapView.frame = CGRectMake(0, 45, self.mainMapView.frame.size.width, 270);
   
   // Unhide everything but the map
   self.myScrollView.hidden = NO;
@@ -279,8 +288,7 @@
     self.myScrollView.hidden = YES;
     
     // Increase map container height
-    self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
-    self.mapView.frame = self.mapContainerView.bounds;
+    self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
     
     NSLog(@"Pin added to set.");
   }
@@ -333,8 +341,7 @@
   self.myScrollView.hidden = YES;
   
   // Increase map container height
-  self.mapContainerView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
-  self.mapView.frame = self.mapContainerView.bounds;
+  self.mainMapView.frame = CGRectMake(0, 45, self.view.frame.size.width, self.view.frame.size.height - 80);
 }
 
 // Hide keyboard when 'Done' is tapped

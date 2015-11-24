@@ -13,7 +13,6 @@
 		193B7DDC1A1A96E900DE8F03 /* gHeart.png in Resources */ = {isa = PBXBuildFile; fileRef = 193B7DDB1A1A96E900DE8F03 /* gHeart.png */; };
 		1946739E1A0D3A7A0079D686 /* PinDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */; };
 		1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1958804A1A1BD3F000F890FD /* MessageUI.framework */; };
-		1959C1D61A1D3DAA00873FF9 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */; };
 		198D165319F1914000F35825 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165219F1914000F35825 /* main.m */; };
 		198D165619F1914000F35825 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165519F1914000F35825 /* AppDelegate.m */; };
 		198D165C19F1914000F35825 /* CityMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 198D165B19F1914000F35825 /* CityMapVC.m */; };
@@ -62,7 +61,6 @@
 		1946739D1A0D3A7A0079D686 /* PinDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinDetailsVC.m; sourceTree = "<group>"; };
 		1958804A1A1BD3F000F890FD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1959C1D31A1D3DAA00873FF9 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = ../../../FacebookSDK/Bolts.framework; sourceTree = "<group>"; };
-		1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		1959C1D71A1E5FEF00873FF9 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		198D164D19F1914000F35825 /* MyFavPins.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyFavPins.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		198D165119F1914000F35825 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				19C113D61A23C6D800912D2D /* Social.framework in Frameworks */,
-				1959C1D61A1D3DAA00873FF9 /* FacebookSDK.framework in Frameworks */,
 				1958804B1A1BD3F000F890FD /* MessageUI.framework in Frameworks */,
 				198D169319F194B200F35825 /* SystemConfiguration.framework in Frameworks */,
 				198D169119F194A900F35825 /* QuartzCore.framework in Frameworks */,
@@ -186,7 +183,6 @@
 				19C113D51A23C6D800912D2D /* Social.framework */,
 				1959C1D71A1E5FEF00873FF9 /* Twitter.framework */,
 				1959C1D31A1D3DAA00873FF9 /* Bolts.framework */,
-				1959C1D41A1D3DAA00873FF9 /* FacebookSDK.framework */,
 				1958804A1A1BD3F000F890FD /* MessageUI.framework */,
 				198D169219F194B200F35825 /* SystemConfiguration.framework */,
 				198D169019F194A900F35825 /* QuartzCore.framework */,
@@ -457,11 +453,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMapsDemo",
 					"$(PROJECT_DIR)",
-					/Users/akshaybharath/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -477,11 +473,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleMapsDemo",
 					"$(PROJECT_DIR)",
-					/Users/akshaybharath/Documents/FacebookSDK,
 				);
 				INFOPLIST_FILE = GoogleMapsDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;

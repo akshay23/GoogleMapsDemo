@@ -17,7 +17,7 @@
 
 @interface CityMapVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *mapContainerView;
+@property (strong, nonatomic) IBOutlet GMSMapView *mainMapView;
 @property (strong, nonatomic) IBOutlet UIView *tableContainerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
 @property (strong, nonatomic) IBOutlet UITextField *txtPinName;

@@ -84,12 +84,22 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods/Bolts.framework"
+  install_framework "Pods/FBSDKCoreKit.framework"
+  install_framework "Pods/FBSDKLoginKit.framework"
+  install_framework "Pods/FBSDKShareKit.framework"
   install_framework "Pods/FlatUIKit.framework"
   install_framework "Pods/Hokusai.framework"
   install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods/Bolts.framework"
+  install_framework "Pods/FBSDKCoreKit.framework"
+  install_framework "Pods/FBSDKLoginKit.framework"
+  install_framework "Pods/FBSDKShareKit.framework"
   install_framework "Pods/FlatUIKit.framework"
   install_framework "Pods/Hokusai.framework"
   install_framework "Pods/MBProgressHUD.framework"
+  install_framework "Pods/Parse.framework"
 fi

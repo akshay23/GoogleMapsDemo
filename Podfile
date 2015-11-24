@@ -8,6 +8,10 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'Hokusai'
 pod 'GoogleMaps'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
+pod 'Parse'
 
 target 'MyFavPins' do
 
