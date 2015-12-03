@@ -7,6 +7,7 @@
 //
 
 #import "CityMapVC.h"
+#import "UIFont+FlatUI.h"
 
 @interface CityMapVC ()
 
@@ -44,18 +45,27 @@
   // Address label and button stuff
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
   self.lblAddress.numberOfLines = 4;
-  self.btnSavePin.layer.cornerRadius = 4;
-  self.btnSavePin.layer.borderWidth = 1;
-  self.btnSavePin.layer.borderColor = [UIColor blueColor].CGColor;
-  self.bntClear.layer.cornerRadius = 4;
-  self.bntClear.layer.borderWidth = 1;
-  self.bntClear.layer.borderColor = [UIColor blueColor].CGColor;
-  self.btnSavePin.enabled = NO;
-  self.bntClear.enabled = NO;
+  
+  [self.btnSavePin setShadowHeight:4.0f];
+  [self.btnSavePin setButtonColor:[UIColor peterRiverColor]];
+  [self.btnSavePin setShadowColor:[UIColor belizeHoleColor]];
+  [self.btnSavePin setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+  [self.btnSavePin setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+  [self.btnSavePin setEnabled:NO];
+  
+  [self.bntClear setShadowHeight:4.0f];
+  [self.bntClear setButtonColor:[UIColor concreteColor]];
+  [self.bntClear setShadowColor:[UIColor asbestosColor]];
+  [self.bntClear setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+  [self.bntClear setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+  [self.bntClear setEnabled:NO];
+
+  // Core Data setup
   self.appDelegate = [[UIApplication sharedApplication] delegate];
   self.managedObjectContext = [self.appDelegate managedObjectContext];
   
   // Add action for Done button
+  [self.txtPinName setFont:[UIFont flatFontOfSize:15]];
   [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
   
   // Gesture recognizer to hide keyboard
@@ -63,7 +73,9 @@
   [self.view addGestureRecognizer:tap];
   
   // Add bar button to nav bar
-  UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"View Saved Pins" style:UIBarButtonItemStylePlain target:self action:@selector(ViewSavedPins)];
+  UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"View Saved Pins" style:UIBarButtonItemStylePlain target:self action:@selector(viewSavedPins)];
+  [right configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [right setTintColor:[UIColor cloudsColor]];
   self.navigationItem.rightBarButtonItem = right;
 }
 
@@ -103,12 +115,6 @@
   [super viewWillLayoutSubviews];
   
   self.mapView.padding = UIEdgeInsetsMake(self.topLayoutGuide.length + 50, 0, self.bottomLayoutGuide.length + 30, 0);
-}
-
-// Clear marker from map
-- (void)clearMarker:(GMSMarker *)marker
-{
-  marker.map = nil;
 }
 
 // Custom marker info window
@@ -182,9 +188,13 @@
 
     self.lblLatitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.latitude] stringValue];
     self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
-    NSString *addressFormat = [NSString stringWithFormat:@"%@,\n%@,\n%@", response.firstResult.thoroughfare, response.firstResult.locality, response.firstResult.administrativeArea];
+    NSString *addressPart = (response.firstResult.thoroughfare != nil) ? [NSString stringWithFormat:@"%@", response.firstResult.thoroughfare] : @"(No street number)";
+    NSString *cityPart = (response.firstResult.locality != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.locality] : @",\r(No city/district info)";
+    NSString *statePart = (response.firstResult.administrativeArea != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.administrativeArea] : @"";
+    NSString *addressFormat = [NSString stringWithFormat:@"%@%@%@", addressPart, cityPart, statePart];
     self.lblAddress.text = addressFormat;
     self.currentAddress = addressFormat;
+    
     self.btnSavePin.enabled = YES;
     self.bntClear.enabled = YES;
     self.txtPinName.text = @"";
@@ -207,10 +217,50 @@
   self.myScrollView.contentOffset = CGPointMake(0, textField.frame.origin.y);
 }
 
+// Hide keyboard when 'Done' is tapped
+- (void)textFieldFinished:(id)sender
+{
+  [sender resignFirstResponder];
+}
+
+// Move to next view to see saved pins
+- (void)viewSavedPins
+{
+  // Custom transition
+  [UIView animateWithDuration:0.75
+                   animations:^{
+                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+                   }];
+  
+  [self.savedPinsTVC setManagedObjectContext:self.managedObjectContext];
+  [self.txtPinName resignFirstResponder];
+  [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
+}
+
 // Hide keyboard when user taps something
 -(void)dismissKeyboard
 {
   [self.txtPinName resignFirstResponder];
+}
+
+// Save to CoreData
+- (void)saveToCoreData:(MyPin *)pin
+{
+  NSEntityDescription *entityList = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
+  NSManagedObject *newPin = [[NSManagedObject alloc] initWithEntity:entityList insertIntoManagedObjectContext:self.managedObjectContext];
+  [newPin setValue:pin.name forKey:@"name"];
+  [newPin setValue:pin.address forKey:@"address"];
+  [newPin setValue:pin.dateCreated forKey:@"dateCreated"];
+  [newPin setValue:pin.latitude forKey:@"latitude"];
+  [newPin setValue:pin.longitude forKey:@"longitude"];
+  
+  NSError *error = nil;
+  if (![newPin.managedObjectContext save:&error])
+  {
+    NSLog(@"Unable to save new pin.");
+    NSLog(@"%@, %@", error, error.localizedDescription);
+  }
 }
 
 // Add to array
@@ -223,7 +273,7 @@
                                       longitude:[NSNumber numberWithDouble:self.currentMarker.position.longitude]
                                         address:self.currentAddress];
     
-    [self SaveToCoreData:pin];
+    [self saveToCoreData:pin];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
     [alert show];
@@ -256,25 +306,6 @@
   }
 }
 
-// Save to CoreData
-- (void)SaveToCoreData:(MyPin *)pin
-{
-  NSEntityDescription *entityList = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
-  NSManagedObject *newPin = [[NSManagedObject alloc] initWithEntity:entityList insertIntoManagedObjectContext:self.managedObjectContext];
-  [newPin setValue:pin.name forKey:@"name"];
-  [newPin setValue:pin.address forKey:@"address"];
-  [newPin setValue:pin.dateCreated forKey:@"dateCreated"];
-  [newPin setValue:pin.latitude forKey:@"latitude"];
-  [newPin setValue:pin.longitude forKey:@"longitude"];
-  
-  NSError *error = nil;
-  if (![newPin.managedObjectContext save:&error])
-  {
-    NSLog(@"Unable to save new pin.");
-    NSLog(@"%@, %@", error, error.localizedDescription);
-  }
-}
-
 // Clear fields
 - (IBAction)ClearInfo:(id)sender
 {
@@ -297,27 +328,6 @@
   
   // Increase map container height
   [self.mapBottomConstraint setConstant:40];
-}
-
-// Hide keyboard when 'Done' is tapped
-- (void)textFieldFinished:(id)sender
-{
-  [sender resignFirstResponder];
-}
-
-// Move to next view to see saved pins
-- (void)ViewSavedPins
-{
-  // Custom transition
-  [UIView animateWithDuration:0.75
-                   animations:^{
-                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                   }];
-  
-  [self.savedPinsTVC setManagedObjectContext:self.managedObjectContext];
-  [self.txtPinName resignFirstResponder];
-  [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
 }
 
 @end

@@ -14,18 +14,19 @@
 #import "GlobalData.h"
 #import "MyPin.h"
 #import "SavedPinsTVC.h"
+#import "FlatUIKit.h"
 
 @interface CityMapVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) IBOutlet GMSMapView *mainMapView;
 @property (strong, nonatomic) IBOutlet UIView *tableContainerView;
 @property (strong, nonatomic) IBOutlet UIScrollView *myScrollView;
-@property (strong, nonatomic) IBOutlet UITextField *txtPinName;
+@property (strong, nonatomic) IBOutlet FUITextField *txtPinName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblAddress;
-@property (strong, nonatomic) IBOutlet UIButton *btnSavePin;
-@property (strong, nonatomic) IBOutlet UIButton *bntClear;
+@property (strong, nonatomic) IBOutlet FUIButton *btnSavePin;
+@property (strong, nonatomic) IBOutlet FUIButton *bntClear;
 @property (strong, nonatomic) AppDelegate *appDelegate;
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
