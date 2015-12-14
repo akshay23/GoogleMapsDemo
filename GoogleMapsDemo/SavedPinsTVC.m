@@ -13,6 +13,8 @@
 @property BOOL searchControllerWasActive;
 @property BOOL searchControllerSearchFieldWasFirstResponder;
 @property (strong, nonatomic) UISearchController *searchController;
+@property (retain, nonatomic) UIBarButtonItem *editButton;
+@property (retain, nonatomic) UIBarButtonItem *doneButton;
 
 @end
 
@@ -27,12 +29,21 @@
   // Preserve selection between presentations.
   self.clearsSelectionOnViewWillAppear = NO;
   
-  // Edit button in the navigation bar for this view controller.
-  self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  // Cusomize the edit and done buttons
+  self.editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:@selector(goEdit:)];
+  [self.editButton configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [self.editButton setTintColor:[UIColor cloudsColor]];
+  self.navigationItem.rightBarButtonItem = self.editButton;
+  
+  self.doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneEdit:)];
+  [self.doneButton configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [self.doneButton setTintColor:[UIColor cloudsColor]];
   
   // Add custom left navi button
   UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Back to Map" style:UIBarButtonItemStylePlain target:self action:@selector(goBack:)];
-  [self.navigationItem setLeftBarButtonItem:left];
+  [left configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [left setTintColor:[UIColor cloudsColor]];
+  self.navigationItem.leftBarButtonItem = left;
   
   NSError *error;
   if (![[self fetchedResultsController] performFetch:&error])
@@ -97,14 +108,28 @@
 // Pops controller with custom animation
 - (void)goBack:(id)sender
 {
-  [UIView animateWithDuration:0.75
-                   animations:^{
-                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
-                   }];
+  [UIView animateWithDuration:0.75 animations:^{
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.navigationController.view cache:NO];
+  }];
   
   [self.navigationController popViewControllerAnimated:YES];
-  
+}
+
+- (void)goEdit:(id)sender
+{
+  self.tableView.editing = YES;
+
+  // Set the right button
+  [self.navigationItem setRightBarButtonItem:self.rightBarButtonItem animated:YES];
+}
+
+- (void)doneEdit:(id)sender
+{
+  self.tableView.editing = NO;
+
+  // Set the right button
+  [self.navigationItem setRightBarButtonItem:self.rightBarButtonItem animated:YES];
 }
 
 // Fetch the results controller
@@ -132,6 +157,15 @@
   _fetchedResultsController.delegate = self;
   
   return _fetchedResultsController;
+}
+
+- (UIBarButtonItem *)rightBarButtonItem
+{
+  if (self.tableView.editing) {
+    return self.doneButton;
+  }
+  
+  return self.editButton;
 }
 
 #pragma mark - Table view data source
@@ -213,19 +247,7 @@
   }
 }
 
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  // Return NO if you do not want the item to be re-orderable.
-  return NO;
-}
-
-#pragma - NSFetchedResultsControllerDelegate stuff
+#pragma mark - NSFetchedResultsControllerDelegate stuff
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
@@ -262,10 +284,7 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-  //UITableView *tableView = self.tableView;
-  
   switch(type) {
-      
     case NSFetchedResultsChangeInsert:
       [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
       break;
@@ -275,12 +294,9 @@
       break;
       
     case NSFetchedResultsChangeUpdate:
-      //[self configureCell:[tableView cellForRowAtIndexPath:sectionIndex] atIndexPath:indexPath];
       break;
       
     case NSFetchedResultsChangeMove:
-      //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-      //[tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
       break;
   }
 }

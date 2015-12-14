@@ -11,6 +11,7 @@
 
 @interface CityMapVC ()
 
+@property BOOL viewInHalf;
 @property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSArray *steps;
@@ -139,78 +140,6 @@
   return infoWindow;
 }
 
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-  if (status == kCLAuthorizationStatusAuthorizedAlways ||
-      status == kCLAuthorizationStatusAuthorizedWhenInUse)
-  {
-    [manager startUpdatingLocation];
-  }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
-{
-  NSLog(@"Stopped updating location");
-  [manager stopUpdatingLocation];
-  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locations.firstObject.coordinate.latitude
-                                longitude:locations.firstObject.coordinate.longitude zoom:16 bearing:0 viewingAngle:0];
-  [self.mainMapView animateToCameraPosition:camera];
-}
-
-// Create marker where user long presses on map
-- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
-{
-  // Remove current marker from map
-  if (self.currentMarker)
-  {
-    self.currentMarker.map = nil;
-    self.currentMarker = nil;
-  }
-  
-  // Reduce map container height
-  [self.mapBottomConstraint setConstant:self.view.frame.size.height / 2];
-  
-  // Unhide everything but the map
-  self.myScrollView.hidden = NO;
-  
-  [self.txtPinName resignFirstResponder];
-  GMSGeocoder *geocoder = [[GMSGeocoder alloc]init];
-  [geocoder reverseGeocodeCoordinate:coordinate completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error){
-    self.currentMarker = [[GMSMarker alloc]init];
-    self.currentMarker.position = coordinate;
-    self.currentMarker.appearAnimation = kGMSMarkerAnimationPop;
-    self.currentMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
-    self.currentMarker.map = self.mainMapView;
-    self.currentMarker.title = response.firstResult.thoroughfare;  // Street address
-    self.currentMarker.snippet = response.firstResult.locality;    // City
-    
-    [self.mainMapView animateToLocation:coordinate];
-
-    self.lblLatitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.latitude] stringValue];
-    self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
-    NSString *addressPart = (response.firstResult.thoroughfare != nil) ? [NSString stringWithFormat:@"%@", response.firstResult.thoroughfare] : @"(No street number)";
-    NSString *cityPart = (response.firstResult.locality != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.locality] : @",\r(No city/district info)";
-    NSString *statePart = (response.firstResult.administrativeArea != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.administrativeArea] : @"";
-    NSString *addressFormat = [NSString stringWithFormat:@"%@%@%@", addressPart, cityPart, statePart];
-    self.lblAddress.text = addressFormat;
-    self.currentAddress = addressFormat;
-    
-    self.btnSavePin.enabled = YES;
-    self.bntClear.enabled = YES;
-    self.txtPinName.text = @"";
-  }];
-}
-
-- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
-{
-  [self.txtPinName resignFirstResponder];
-}
-
-- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
-{
-  [self.txtPinName resignFirstResponder];
-}
-
 // Move scrollview up
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -226,13 +155,21 @@
 // Move to next view to see saved pins
 - (void)viewSavedPins
 {
-  // Custom transition
-  [UIView animateWithDuration:0.75
-                   animations:^{
-                     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
-                   }];
+  if (self.currentMarker)
+  {
+    self.currentMarker.map = nil;
+    self.currentMarker = nil;
+  }
   
+  self.viewInHalf = NO;
+  
+  // Custom transition
+  [UIView animateWithDuration:0.75 animations:^
+  {
+     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self.navigationController.view cache:NO];
+  }];
+
   [self.savedPinsTVC setManagedObjectContext:self.managedObjectContext];
   [self.txtPinName resignFirstResponder];
   [self.navigationController pushViewController:self.savedPinsTVC animated:YES];
@@ -263,6 +200,8 @@
   }
 }
 
+#pragma mark - IBActions
+
 // Add to array
 - (IBAction)SavePin:(id)sender
 {
@@ -275,7 +214,11 @@
     
     [self saveToCoreData:pin];
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved" message:@"Pin was successfully saved!" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved"
+                                                   message:@"Pin was successfully saved!"
+                                                  delegate:self
+                                         cancelButtonTitle:nil
+                                         otherButtonTitles:@"Ok", nil];
     [alert show];
     
     self.currentMarker.map = nil;
@@ -291,6 +234,7 @@
     
     // Hide everything but the map
     self.myScrollView.hidden = YES;
+    self.viewInHalf = NO;
     
     // Increase map container height
     [self.mapBottomConstraint setConstant:40];
@@ -299,7 +243,11 @@
   }
   else
   {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Pin was NOT saved! Please enter a name." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
+                                                   message:@"Pin was NOT saved! Please enter a name."
+                                                  delegate:self
+                                         cancelButtonTitle:nil
+                                         otherButtonTitles:@"Ok", nil];
     [alert show];
     
     NSLog(@"Pin was not added.");
@@ -325,9 +273,91 @@
   
   // Hide everything but the map
   self.myScrollView.hidden = YES;
+  self.viewInHalf = NO;
   
   // Increase map container height
   [self.mapBottomConstraint setConstant:40];
+}
+
+#pragma mark - CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+  if (status == kCLAuthorizationStatusAuthorizedAlways ||
+      status == kCLAuthorizationStatusAuthorizedWhenInUse)
+  {
+    [manager startUpdatingLocation];
+  }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+  NSLog(@"Stopped updating location");
+  [manager stopUpdatingLocation];
+  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locations.firstObject.coordinate.latitude
+                                                          longitude:locations.firstObject.coordinate.longitude zoom:16 bearing:0 viewingAngle:0];
+  [self.mainMapView animateToCameraPosition:camera];
+}
+
+#pragma mark - GMSMapViewDelegate methods
+
+- (void)mapView:(GMSMapView *)mapView didLongPressAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+  // Remove current marker from map
+  if (self.currentMarker)
+  {
+    self.currentMarker.map = nil;
+    self.currentMarker = nil;
+  }
+  
+  if (!self.viewInHalf)
+  {
+    // Reduce map container height
+    [self.mapBottomConstraint setConstant:self.view.frame.size.height / 2];
+    
+    // Unhide everything but the map
+    self.myScrollView.hidden = NO;
+    
+    // Set the bool
+    self.viewInHalf = YES;
+  }
+  
+  [self.txtPinName resignFirstResponder];
+  GMSGeocoder *geocoder = [[GMSGeocoder alloc]init];
+  [geocoder reverseGeocodeCoordinate:coordinate completionHandler:^(GMSReverseGeocodeResponse *response, NSError *error){
+    self.currentMarker = [[GMSMarker alloc]init];
+    self.currentMarker.position = coordinate;
+    self.currentMarker.appearAnimation = kGMSMarkerAnimationPop;
+    self.currentMarker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
+    self.currentMarker.map = self.mainMapView;
+    self.currentMarker.title = response.firstResult.thoroughfare;  // Street address
+    self.currentMarker.snippet = response.firstResult.locality;    // City
+    
+    [self.mainMapView animateToLocation:coordinate];
+    
+    self.lblLatitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.latitude] stringValue];
+    self.lblLongitude.text = [[NSNumber numberWithDouble:self.currentMarker.position.longitude] stringValue];
+    NSString *addressPart = (response.firstResult.thoroughfare != nil) ? [NSString stringWithFormat:@"%@", response.firstResult.thoroughfare] : @"(No street number)";
+    NSString *cityPart = (response.firstResult.locality != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.locality] : @",\r(No city/district info)";
+    NSString *statePart = (response.firstResult.administrativeArea != nil) ? [NSString stringWithFormat:@",\r%@", response.firstResult.administrativeArea] : @"";
+    NSString *addressFormat = [NSString stringWithFormat:@"%@%@%@", addressPart, cityPart, statePart];
+    self.lblAddress.text = addressFormat;
+    self.currentAddress = addressFormat;
+    
+    self.btnSavePin.enabled = YES;
+    self.bntClear.enabled = YES;
+    self.txtPinName.text = @"";
+  }];
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker
+{
+  [self.txtPinName resignFirstResponder];
+}
+
+- (void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+{
+  [self.txtPinName resignFirstResponder];
 }
 
 @end

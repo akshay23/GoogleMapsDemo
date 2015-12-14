@@ -28,7 +28,7 @@
 @property (strong, nonatomic) IBOutlet FUIButton *btnSavePin;
 @property (strong, nonatomic) IBOutlet FUIButton *bntClear;
 @property (strong, nonatomic) AppDelegate *appDelegate;
-@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectContext* managedObjectContext;
 
 @property (strong, nonatomic) IBOutlet UILabel *lblPinNameTitle;
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitudeTitle;
