@@ -180,6 +180,7 @@
 {
   // Return the number of rows in the section.
   id  sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+  NSLog(@"Number of rows: %lu", (unsigned long)[sectionInfo numberOfObjects]);
   return [sectionInfo numberOfObjects];
 }
 
@@ -242,8 +243,6 @@
     NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.managedObjectContext deleteObject:managedObject];
     [self.managedObjectContext save:nil];
-  } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-    // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
   }
 }
 

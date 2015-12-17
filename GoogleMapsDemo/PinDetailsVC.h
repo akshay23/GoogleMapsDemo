@@ -12,6 +12,7 @@
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "FlatUIKit.h"
 #import "MyPin.h"
 
 @interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
@@ -23,9 +24,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblAddress;
-@property (strong, nonatomic) IBOutlet UIView *mapContainer;
-@property (strong, nonatomic) IBOutlet UIButton *btnDelete;
-@property (strong, nonatomic) IBOutlet UIButton *btnSaveChanges;
+@property (strong, nonatomic) IBOutlet FUIButton *btnDelete;
+@property (strong, nonatomic) IBOutlet FUIButton *btnSaveChanges;
+@property (strong, nonatomic) IBOutlet GMSMapView *mainMapView;
 
 - (IBAction)deletePin:(id)sender;
 - (IBAction)saveChanges:(id)sender;

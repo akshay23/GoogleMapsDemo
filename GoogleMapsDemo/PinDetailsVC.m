@@ -8,12 +8,6 @@
 
 #import "PinDetailsVC.h"
 
-@interface PinDetailsVC ()
-
-@property (strong, nonatomic) GMSMapView *mapView;
-
-@end
-
 @implementation PinDetailsVC
 
 - (void)viewDidLoad
@@ -23,21 +17,27 @@
   // Address label and button stuff
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
   self.lblAddress.numberOfLines = 4;
-  self.btnDelete.layer.cornerRadius = 4;
-  self.btnDelete.layer.borderWidth = 1;
-  self.btnDelete.layer.borderColor = [UIColor blueColor].CGColor;
-  self.btnSaveChanges.layer.cornerRadius = 4;
-  self.btnSaveChanges.layer.borderWidth = 1;
-  self.btnSaveChanges.layer.borderColor = [UIColor blueColor].CGColor;
   
   // Set up Google Maps
   // Initialize google map view with camera position
-  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.pinObject.latitude doubleValue] longitude:[self.pinObject.longitude doubleValue] zoom:16 bearing:0 viewingAngle:0];
-  self.mapView = [GMSMapView mapWithFrame:self.mapContainer.bounds camera:camera];
-  self.mapView.mapType = kGMSTypeNormal;
-  self.mapView.myLocationEnabled = NO;
-  self.mapView.delegate = self;
-  [self.mapView setMinZoom:12 maxZoom:18];
+  self.mainMapView.mapType = kGMSTypeNormal;
+  self.mainMapView.myLocationEnabled = YES;
+  self.mainMapView.settings.myLocationButton = YES;
+  self.mainMapView.delegate = self;
+  [self.mainMapView setMinZoom:12 maxZoom:18];
+  
+  // Make buttons look nice
+  [self.btnSaveChanges setShadowHeight:4.0f];
+  [self.btnSaveChanges setButtonColor:[UIColor peterRiverColor]];
+  [self.btnSaveChanges setShadowColor:[UIColor belizeHoleColor]];
+  [self.btnSaveChanges setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+  [self.btnSaveChanges setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
+  
+  [self.btnDelete setShadowHeight:4.0f];
+  [self.btnDelete setButtonColor:[UIColor alizarinColor]];
+  [self.btnDelete setShadowColor:[UIColor pomegranateColor]];
+  [self.btnDelete setTitleColor:[UIColor cloudsColor] forState:UIControlStateNormal];
+  [self.btnDelete setTitleColor:[UIColor cloudsColor] forState:UIControlStateHighlighted];
   
   // Get the pin details
   self.txtPinName.text = self.pinObject.name;
@@ -45,17 +45,13 @@
   self.lblLatitude.text = [self.pinObject.latitude stringValue];
   self.lblLongitude.text = [self.pinObject.longitude stringValue];
   
-  // Add views to main view
-  [self.mapContainer addSubview:self.mapView];
-  self.mapContainer.frame = CGRectMake(0, self.mapContainer.frame.origin.y, self.mapContainer.frame.size.width, self.mapContainer.frame.size.height);
-  [self.view addSubview:self.mapContainer];
-  
   // Create marker
   GMSMarker *marker = [[GMSMarker alloc] init];
   marker.position = CLLocationCoordinate2DMake([self.pinObject.latitude doubleValue], [self.pinObject.longitude doubleValue]);
   marker.title = self.pinObject.name;
+  marker.icon = [GMSMarker markerImageWithColor:[UIColor blueColor]];
   marker.appearAnimation = kGMSMarkerAnimationPop;
-  marker.map = self.mapView;
+  marker.map = self.mainMapView;
   
   // Add action for Done button
   [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
@@ -64,9 +60,27 @@
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
   [self.view addGestureRecognizer:tap];
   
+  // Add custom left navi button
+  UIBarButtonItem *left = [[UIBarButtonItem alloc] initWithTitle:@"Back to List" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+  [left configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [left setTintColor:[UIColor cloudsColor]];
+  self.navigationItem.leftBarButtonItem = left;
+  
   // Add share button to right side of nav
-  UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStyleDone target:self action:@selector(sharePin)];
-  [self.navigationItem setRightBarButtonItem:share];
+  UIBarButtonItem *share = [[UIBarButtonItem alloc] initWithTitle:@"Share" style:UIBarButtonItemStylePlain target:self action:@selector(sharePin)];
+  [share configureFlatButtonWithColor:[UIColor peterRiverColor] highlightedColor:[UIColor belizeHoleColor] cornerRadius:3];
+  [share setTintColor:[UIColor cloudsColor]];
+  self.navigationItem.rightBarButtonItem = share;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
+  GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.pinObject.latitude doubleValue]
+                                                          longitude:[self.pinObject.longitude doubleValue] zoom:16 bearing:0 viewingAngle:0];
+  [self.mainMapView animateToCameraPosition:camera];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -272,6 +286,12 @@
     params[kv[0]] = val;
   }
   return params;
+}
+
+// Pops controller with custom animation
+- (void)goBack
+{
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark UIActionSheetDelegate methods
