@@ -13,12 +13,13 @@
 #import <Twitter/Twitter.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "FlatUIKit.h"
+#import "SavedPinsTVC.h"
 #import "MyPin.h"
 
 @interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) MyPin *pinObject;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) SavedPinsTVC *delegate;
 @property (strong, nonatomic) NSIndexPath *indexPathOfObject;
 @property (strong, nonatomic) IBOutlet UITextField *txtPinName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;

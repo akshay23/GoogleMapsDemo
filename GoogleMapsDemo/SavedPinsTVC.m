@@ -7,6 +7,7 @@
 //
 
 #import "SavedPinsTVC.h"
+#import "PinDetailsVC.h"
 
 @interface SavedPinsTVC ()
 
@@ -45,6 +46,16 @@
   [left setTintColor:[UIColor cloudsColor]];
   self.navigationItem.leftBarButtonItem = left;
   
+  // Search bar setup
+  self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+  self.searchController.dimsBackgroundDuringPresentation = NO;
+  self.searchController.searchResultsUpdater = self;
+  self.searchController.delegate = self;
+  [self.searchController.searchBar sizeToFit];
+  self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+  self.tableView.tableHeaderView = self.searchController.searchBar;
+  
+  // fetch
   NSError *error;
   if (![[self fetchedResultsController] performFetch:&error])
   {
@@ -53,13 +64,12 @@
     exit(-1);  // Fail
   }
   
-  self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-  self.searchController.dimsBackgroundDuringPresentation = NO;
-  self.searchController.searchResultsUpdater = self;
-  self.searchController.delegate = self;
-  [self.searchController.searchBar sizeToFit];
-  self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-  self.tableView.tableHeaderView = self.searchController.searchBar;
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
+  [[self.fetchedResultsController fetchRequest] setEntity:entity];
+  
+  NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+  [[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
+  [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -78,13 +88,6 @@
       self.searchControllerSearchFieldWasFirstResponder = NO;
     }
   }
-  
-  NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.managedObjectContext];
-  [[self.fetchedResultsController fetchRequest] setEntity:entity];
-  
-  NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
-  [[self.fetchedResultsController fetchRequest] setSortDescriptors:[NSArray arrayWithObject:sort]];
-  [[self.fetchedResultsController fetchRequest] setFetchBatchSize:20];
 }
 
 - (void)viewDidUnload
@@ -179,7 +182,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   // Return the number of rows in the section.
-  id  sectionInfo = [[_fetchedResultsController sections] objectAtIndex:section];
+  id  sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
   NSLog(@"Number of rows: %lu", (unsigned long)[sectionInfo numberOfObjects]);
   return [sectionInfo numberOfObjects];
 }
@@ -187,7 +190,7 @@
 // Configure cell at indexPath
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-  MyPin *pin = [_fetchedResultsController objectAtIndexPath:indexPath];
+  MyPin *pin = [self.fetchedResultsController objectAtIndexPath:indexPath];
   cell.textLabel.text = pin.name;
   NSDateFormatter *df = [[NSDateFormatter alloc] init];
   [df setDateStyle:NSDateFormatterLongStyle]; // day, Full month and year
@@ -213,10 +216,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  MyPin *pin = [_fetchedResultsController objectAtIndexPath:indexPath];
+  MyPin *pin = [self.fetchedResultsController objectAtIndexPath:indexPath];
   PinDetailsVC *pinDetailsVC = [[GlobalData getInstance].mainStoryboard instantiateViewControllerWithIdentifier:@"pinDetailsVC"];
   pinDetailsVC.pinObject = pin;
-  pinDetailsVC.fetchedResultsController = self.fetchedResultsController;
+  pinDetailsVC.delegate = self;
   pinDetailsVC.indexPathOfObject = indexPath;
   
   [[self.searchController searchBar] resignFirstResponder];
@@ -273,10 +276,6 @@
       break;
       
     case NSFetchedResultsChangeMove:
-      [tableView deleteRowsAtIndexPaths:[NSArray
-                                         arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-      [tableView insertRowsAtIndexPaths:[NSArray
-                                         arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
       break;
   }
 }

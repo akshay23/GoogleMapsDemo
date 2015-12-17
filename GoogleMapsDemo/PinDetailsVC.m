@@ -102,17 +102,18 @@
 
 - (IBAction)saveChanges:(id)sender
 {
+  FUIAlertView *alertView;
   if (self.txtPinName.text && ![self.txtPinName.text isEqualToString:@""])
   {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateCreated=%@", self.pinObject.dateCreated];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.fetchedResultsController.managedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"MyPin" inManagedObjectContext:self.delegate.fetchedResultsController.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setPredicate:pred];
     
     NSError *error = nil;
-    NSArray *result = [self.fetchedResultsController.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSArray *result = [self.delegate.fetchedResultsController.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     NSManagedObject *pin = (NSManagedObject *)[result objectAtIndex:0];
     [pin setValue:self.txtPinName.text forKey:@"name"];
     
@@ -122,24 +123,38 @@
       NSLog(@"%@, %@", saveError, saveError.localizedDescription);
     }
     
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sucess!" message:@"Changes successfully saved." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    alertView = [[FUIAlertView alloc] initWithTitle:@"Success"
+                                            message:@"Changes successfully saved."
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
   }
   else
   {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Can't Save!" message:@"Pin name cannot be empty" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-    [alert show];
+    alertView = [[FUIAlertView alloc] initWithTitle:@"Can't Save!"
+                                            message:@"Pin name cannot be empty!"
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
   }
+  
+  alertView.titleLabel.textColor = [UIColor cloudsColor];
+  alertView.messageLabel.textColor = [UIColor cloudsColor];
+  alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+  alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+  alertView.defaultButtonColor = [UIColor cloudsColor];
+  alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+  alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+  [alertView show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   if (buttonIndex == 1)
   {
-    NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:self.indexPathOfObject];
-    [self.fetchedResultsController.managedObjectContext deleteObject:managedObject];
-    [self.fetchedResultsController.managedObjectContext save:nil];
-    
+    NSManagedObject *managedObject = [self.delegate.fetchedResultsController objectAtIndexPath:self.indexPathOfObject];
+    [self.delegate.fetchedResultsController.managedObjectContext deleteObject:managedObject];
+    [self.delegate.fetchedResultsController.managedObjectContext save:nil];
     [self.navigationController popViewControllerAnimated:YES];
   }
 }

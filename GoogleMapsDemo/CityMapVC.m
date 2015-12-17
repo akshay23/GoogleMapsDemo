@@ -214,12 +214,20 @@
     
     [self saveToCoreData:pin];
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Pin Saved"
-                                                   message:@"Pin was successfully saved!"
-                                                  delegate:self
-                                         cancelButtonTitle:nil
-                                         otherButtonTitles:@"Ok", nil];
-    [alert show];
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"Pin Saved"
+                                                          message:@"Pin was successfully saved!"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    [alertView show];
     
     self.currentMarker.map = nil;
     self.currentMarker = nil;
