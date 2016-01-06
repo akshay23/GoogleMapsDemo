@@ -91,13 +91,20 @@
 
 - (IBAction)deletePin:(id)sender
 {
-  UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Confirm"
+  FUIAlertView * alertView = [[FUIAlertView alloc] initWithTitle:@"Confirm Delete"
                                                    message:@"Are you sure you want to delete this pin?"
                                                   delegate:self
                                          cancelButtonTitle:@"No"
                                          otherButtonTitles:@"Yes", nil];
   
-  [alert show];
+  alertView.titleLabel.textColor = [UIColor cloudsColor];
+  alertView.messageLabel.textColor = [UIColor cloudsColor];
+  alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+  alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+  alertView.defaultButtonColor = [UIColor cloudsColor];
+  alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+  alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+  [alertView show];
 }
 
 - (IBAction)saveChanges:(id)sender
@@ -148,7 +155,7 @@
   [alertView show];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(FUIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
   if (buttonIndex == 1)
   {
@@ -278,13 +285,20 @@
   }
   else
   {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Twitter Login"
-                                                     message:@"Please login to Twitter on your phone first, then try again."
-                                                    delegate:self
-                                           cancelButtonTitle:@"Ok"
-                                           otherButtonTitles:nil];
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"Twitter Login"
+                                                          message:@"Please login to Twitter on your phone first, then try again."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
     
-    [alert show];
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    [alertView show];
   }
 }
 

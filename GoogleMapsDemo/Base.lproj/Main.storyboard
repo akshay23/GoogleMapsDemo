@@ -182,16 +182,24 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="236"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press and hold anywhere on the map to create new pin!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acz-QY-dEq">
+                                <rect key="frame" x="80" y="575" width="440" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.61929571439999997" blue="0.035081411460000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zMT-cn-Jgp" firstAttribute="top" secondItem="Nvc-uN-gTf" secondAttribute="bottom" id="5qm-79-xSe"/>
+                            <constraint firstItem="acz-QY-dEq" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Ip5-P2-yvp"/>
                             <constraint firstItem="fZy-II-hEM" firstAttribute="top" secondItem="zMT-cn-Jgp" secondAttribute="bottom" constant="-50" id="Om8-wu-iAQ"/>
                             <constraint firstItem="A53-QG-S2c" firstAttribute="top" secondItem="jN5-XS-eCF" secondAttribute="bottom" constant="15" id="Wl7-Gl-gpp"/>
                             <constraint firstItem="fZy-II-hEM" firstAttribute="bottom" secondItem="A53-QG-S2c" secondAttribute="top" id="Xu4-YY-Fmt"/>
                             <constraint firstItem="fZy-II-hEM" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="bbB-62-GzF"/>
                             <constraint firstItem="fZy-II-hEM" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="l1d-np-je1"/>
                             <constraint firstItem="A53-QG-S2c" firstAttribute="top" secondItem="3S8-eh-wmG" secondAttribute="bottom" constant="15" id="pMe-57-tpT"/>
+                            <constraint firstItem="A53-QG-S2c" firstAttribute="top" secondItem="acz-QY-dEq" secondAttribute="bottom" constant="5" id="qYd-4r-yFH"/>
                             <constraint firstItem="zMT-cn-Jgp" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="qrQ-cp-zBy"/>
                             <constraint firstItem="zMT-cn-Jgp" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="xxi-Dj-4G8"/>
                             <constraint firstItem="A53-QG-S2c" firstAttribute="top" secondItem="zMT-cn-Jgp" secondAttribute="bottom" constant="300" id="yMy-hb-dcm"/>
@@ -203,6 +211,7 @@
                         <outlet property="btnSavePin" destination="jN5-XS-eCF" id="dja-H0-3Ce"/>
                         <outlet property="lblAddress" destination="6Jj-6f-Jc2" id="ox8-Pr-SuM"/>
                         <outlet property="lblAddressTitle" destination="Hw7-Tf-1UD" id="rhe-Hp-amH"/>
+                        <outlet property="lblInfo" destination="acz-QY-dEq" id="N2c-sQ-ix4"/>
                         <outlet property="lblLatitude" destination="wlu-9x-Owk" id="MKB-bi-EP0"/>
                         <outlet property="lblLatitudeTitle" destination="Lr1-un-qtd" id="PBl-EQ-BrR"/>
                         <outlet property="lblLongitude" destination="6xH-Ft-Wa8" id="0Jo-h8-XBF"/>

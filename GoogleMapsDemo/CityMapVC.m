@@ -100,7 +100,7 @@
   [self.mainMapView setMinZoom:10 maxZoom:16];
   
   // Hide text controls
-  [self.mapBottomConstraint setConstant:40];
+  [self.mapBottomConstraint setConstant:30];
   [self.myScrollView setHidden:YES];
 }
 
@@ -243,9 +243,10 @@
     // Hide everything but the map
     self.myScrollView.hidden = YES;
     self.viewInHalf = NO;
+    self.lblInfo.hidden = NO;
     
     // Increase map container height
-    [self.mapBottomConstraint setConstant:40];
+    [self.mapBottomConstraint setConstant:30];
     
     NSLog(@"Pin added to set.");
   }
@@ -282,9 +283,10 @@
   // Hide everything but the map
   self.myScrollView.hidden = YES;
   self.viewInHalf = NO;
+  self.lblInfo.hidden = NO;
   
   // Increase map container height
-  [self.mapBottomConstraint setConstant:40];
+  [self.mapBottomConstraint setConstant:30];
 }
 
 #pragma mark - CLLocationManagerDelegate methods
@@ -325,6 +327,9 @@
     
     // Unhide everything but the map
     self.myScrollView.hidden = NO;
+    
+    // Hide info text
+    self.lblInfo.hidden = YES;
     
     // Set the bool
     self.viewInHalf = YES;

@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblLatitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblLongitude;
 @property (strong, nonatomic) IBOutlet UILabel *lblAddress;
+@property (strong, nonatomic) IBOutlet UILabel *lblInfo;
 @property (strong, nonatomic) IBOutlet FUIButton *btnSavePin;
 @property (strong, nonatomic) IBOutlet FUIButton *bntClear;
 @property (strong, nonatomic) AppDelegate *appDelegate;

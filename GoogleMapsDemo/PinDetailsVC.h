@@ -16,7 +16,7 @@
 #import "SavedPinsTVC.h"
 #import "MyPin.h"
 
-@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate>
+@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, FUIAlertViewDelegate>
 
 @property (strong, nonatomic) MyPin *pinObject;
 @property (strong, nonatomic) SavedPinsTVC *delegate;
