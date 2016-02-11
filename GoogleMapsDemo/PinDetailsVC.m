@@ -311,7 +311,7 @@
   {
     NSArray *kv = [pair componentsSeparatedByString:@"="];
     NSString *val =
-    [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    [kv[1] stringByRemovingPercentEncoding];
     params[kv[0]] = val;
   }
   return params;

@@ -243,8 +243,7 @@
     // Hide everything but the map
     self.myScrollView.hidden = YES;
     self.viewInHalf = NO;
-    self.lblInfo.hidden = NO;
-    
+
     // Increase map container height
     [self.mapBottomConstraint setConstant:30];
     
@@ -252,12 +251,20 @@
   }
   else
   {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error"
-                                                   message:@"Pin was NOT saved! Please enter a name."
-                                                  delegate:self
-                                         cancelButtonTitle:nil
-                                         otherButtonTitles:@"Ok", nil];
-    [alert show];
+    FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"Error"
+                                                          message:@"Pin was NOT saved! Please enter a name."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+    alertView.titleLabel.textColor = [UIColor cloudsColor];
+    alertView.messageLabel.textColor = [UIColor cloudsColor];
+    alertView.backgroundOverlay.backgroundColor = [[UIColor cloudsColor] colorWithAlphaComponent:0.8];
+    alertView.alertContainer.backgroundColor = [UIColor midnightBlueColor];
+    alertView.defaultButtonColor = [UIColor cloudsColor];
+    alertView.defaultButtonShadowColor = [UIColor asbestosColor];
+    alertView.defaultButtonTitleColor = [UIColor asbestosColor];
+    
+    [alertView show];
     
     NSLog(@"Pin was not added.");
   }
@@ -283,7 +290,6 @@
   // Hide everything but the map
   self.myScrollView.hidden = YES;
   self.viewInHalf = NO;
-  self.lblInfo.hidden = NO;
   
   // Increase map container height
   [self.mapBottomConstraint setConstant:30];
@@ -327,9 +333,6 @@
     
     // Unhide everything but the map
     self.myScrollView.hidden = NO;
-    
-    // Hide info text
-    self.lblInfo.hidden = YES;
     
     // Set the bool
     self.viewInHalf = YES;
