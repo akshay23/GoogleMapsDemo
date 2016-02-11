@@ -234,16 +234,11 @@
   
   NSString *postFormatted = [NSString stringWithFormat:@"Check out this cool location: %@", self.pinObject.name];
   NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
-  NSURL *staticImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@", self.pinObject.latitude, self.pinObject.longitude]];
-  UIImage *mapImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:staticImageURL]];
-
-  FBSDKSharePhoto *fbPhoto = [[FBSDKSharePhoto alloc] init];
-  fbPhoto.image = mapImage;
-  fbPhoto.userGenerated = YES;
-  fbPhoto.caption = [NSString stringWithFormat:@"%@\n%@", postFormatted, pinURL];
   
-  FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-  content.photos = @[fbPhoto];
+  FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+  content.contentURL = [NSURL URLWithString:pinURL];
+  content.contentTitle = postFormatted;
+  
   [hud hide:YES];
   
   [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
