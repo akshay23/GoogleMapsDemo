@@ -243,6 +243,7 @@
     // Hide everything but the map
     self.myScrollView.hidden = YES;
     self.viewInHalf = NO;
+    self.lblInfo.hidden = NO;
 
     // Increase map container height
     [self.mapBottomConstraint setConstant:30];
@@ -290,6 +291,7 @@
   // Hide everything but the map
   self.myScrollView.hidden = YES;
   self.viewInHalf = NO;
+  self.lblInfo.hidden = NO;
   
   // Increase map container height
   [self.mapBottomConstraint setConstant:30];
@@ -333,6 +335,7 @@
     
     // Unhide everything but the map
     self.myScrollView.hidden = NO;
+    self.lblInfo.hidden = YES;
     
     // Set the bool
     self.viewInHalf = YES;
