@@ -90,7 +90,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods/FBSDKLoginKit.framework"
   install_framework "Pods/FBSDKShareKit.framework"
   install_framework "Pods/FlatUIKit.framework"
-  install_framework "Pods/Hokusai.framework"
   install_framework "Pods/MBProgressHUD.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -100,6 +99,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods/FBSDKLoginKit.framework"
   install_framework "Pods/FBSDKShareKit.framework"
   install_framework "Pods/FlatUIKit.framework"
-  install_framework "Pods/Hokusai.framework"
   install_framework "Pods/MBProgressHUD.framework"
 fi

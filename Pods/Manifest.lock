@@ -17,7 +17,6 @@ PODS:
     - FBSDKCoreKit
   - FlatUIKit (1.6.2)
   - GoogleMaps (1.10.5)
-  - Hokusai (0.1.20)
   - MBProgressHUD (0.9.2)
 
 DEPENDENCIES:
@@ -29,7 +28,6 @@ DEPENDENCIES:
   - FBSDKShareKit
   - FlatUIKit
   - GoogleMaps (~> 1.10.5)
-  - Hokusai
   - MBProgressHUD
 
 SPEC CHECKSUMS:
@@ -42,7 +40,6 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   GoogleMaps: da51c62c338c2d9c47cdad470a0d1e0e4b8544e4
-  Hokusai: b74bdac1adc90c4eee2c9233c5d48c42f5f5ae6c
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
 
 COCOAPODS: 0.39.0

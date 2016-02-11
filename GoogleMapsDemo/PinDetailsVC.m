@@ -184,8 +184,6 @@
 {
   AHKActionSheet *actionSheet = [[AHKActionSheet alloc] initWithTitle:@"Share via"];
   
-  
-  
   [actionSheet addButtonWithTitle:@"Email" image:[UIImage imageNamed:@"EmailIcon"] type:AHKActionSheetButtonTypeDefault handler:^(AHKActionSheet *as) {
     NSLog(@"Email share option tapped");
     [self composeEmail];
