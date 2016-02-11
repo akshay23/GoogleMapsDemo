@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '71BB60E444F2D3243425BB0C'
+               BlueprintIdentifier = 'A1A2B80BD6A32E3E27C1C8DB'
                BlueprintName = 'FlatUIKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'FlatUIKit.framework'>

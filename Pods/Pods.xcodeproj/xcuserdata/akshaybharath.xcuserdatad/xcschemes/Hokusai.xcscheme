@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '51542FCDDF72AAA2C11575AA'
+               BlueprintIdentifier = '33CBB2A67052F48D07B4675C'
                BlueprintName = 'Hokusai'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Hokusai.framework'>

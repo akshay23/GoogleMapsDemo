@@ -11,7 +11,7 @@ pod 'GoogleMaps', '~> 1.10.5'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
-pod 'Parse'
+pod 'AHKActionSheet'
 
 target 'MyFavPins' do
 

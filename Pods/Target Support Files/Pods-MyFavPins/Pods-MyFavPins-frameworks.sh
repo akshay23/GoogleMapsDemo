@@ -84,6 +84,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-MyFavPins/AHKActionSheet.framework"
   install_framework "Pods-MyFavPins/Bolts.framework"
   install_framework "Pods-MyFavPins/FBSDKCoreKit.framework"
   install_framework "Pods-MyFavPins/FBSDKLoginKit.framework"
@@ -91,9 +92,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MyFavPins/FlatUIKit.framework"
   install_framework "Pods-MyFavPins/Hokusai.framework"
   install_framework "Pods-MyFavPins/MBProgressHUD.framework"
-  install_framework "Pods-MyFavPins/Parse.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-MyFavPins/AHKActionSheet.framework"
   install_framework "Pods-MyFavPins/Bolts.framework"
   install_framework "Pods-MyFavPins/FBSDKCoreKit.framework"
   install_framework "Pods-MyFavPins/FBSDKLoginKit.framework"
@@ -101,5 +102,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MyFavPins/FlatUIKit.framework"
   install_framework "Pods-MyFavPins/Hokusai.framework"
   install_framework "Pods-MyFavPins/MBProgressHUD.framework"
-  install_framework "Pods-MyFavPins/Parse.framework"
 fi

@@ -7,6 +7,7 @@
 //
 
 #import "PinDetailsVC.h"
+#import "AHKActionSheet.h"
 
 @implementation PinDetailsVC
 
@@ -181,9 +182,26 @@
 // Show ActionSheet of share options
 - (void)sharePin
 {
-  UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Share via" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles: @"Email", @"Facebook", @"Twitter", nil];
-  actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-  [actionSheet showInView:self.view];
+  AHKActionSheet *actionSheet = [[AHKActionSheet alloc] initWithTitle:@"Share via"];
+  
+  
+  
+  [actionSheet addButtonWithTitle:@"Email" image:[UIImage imageNamed:@"EmailIcon"] type:AHKActionSheetButtonTypeDefault handler:^(AHKActionSheet *as) {
+    NSLog(@"Email share option tapped");
+    [self composeEmail];
+  }];
+  
+  [actionSheet addButtonWithTitle:@"Twitter" image:[UIImage imageNamed:@"TwitterIcon"] type:AHKActionSheetButtonTypeDefault handler:^(AHKActionSheet *as) {
+    NSLog(@"Twitter share option tapped");
+    [self createTweet];
+  }];
+  
+  [actionSheet addButtonWithTitle:@"Facebook" image:[UIImage imageNamed:@"FacebookIcon"] type:AHKActionSheetButtonTypeDefault handler:^(AHKActionSheet *as) {
+    NSLog(@"Facebook share option tapped");
+    [self createFacebookPost];
+  }];
+  
+  [actionSheet show];
 }
 
 // Compose new email to send
@@ -321,30 +339,6 @@
 - (void)goBack
 {
   [self.navigationController popViewControllerAnimated:YES];
-}
-
-#pragma mark UIActionSheetDelegate methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  if (buttonIndex == 0)  // Email
-  {
-    NSLog(@"Share via Email");
-    
-    [self composeEmail];
-  }
-  else if (buttonIndex == 1) // Facebook
-  {
-    NSLog(@"Share via Facebook");
-    
-    [self createFacebookPost];
-  }
-  else if (buttonIndex == 2) // Twitter
-  {
-    NSLog(@"Share via Twitter");
-    
-    [self createTweet];
-  }
 }
 
 #pragma mark MFMailComposeViewControllerDelegate delegate
