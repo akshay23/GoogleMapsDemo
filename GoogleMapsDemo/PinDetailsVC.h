@@ -12,11 +12,13 @@
 #import <MessageUI/MessageUI.h>
 #import <Twitter/Twitter.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "FlatUIKit.h"
 #import "SavedPinsTVC.h"
 #import "MyPin.h"
 
-@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, FUIAlertViewDelegate>
+@interface PinDetailsVC : UIViewController <GMSMapViewDelegate, CLLocationManagerDelegate, UIActionSheetDelegate, MFMailComposeViewControllerDelegate, FUIAlertViewDelegate, FBSDKSharingDelegate>
 
 @property (strong, nonatomic) MyPin *pinObject;
 @property (strong, nonatomic) SavedPinsTVC *delegate;
