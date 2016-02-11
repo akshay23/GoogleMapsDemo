@@ -28,7 +28,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - FlatUIKit
   - GoogleMaps (~> 1.10.5)
-  - MBProgressHUD
+  - MBProgressHUD (~> 0.9.2)
 
 SPEC CHECKSUMS:
   AHKActionSheet: f0b312b5c689f72924d231c39dae140ecd5c1d46

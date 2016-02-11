@@ -2,7 +2,6 @@
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'MBProgressHUD'
 pod 'FlatUIKit'
 pod 'Fabric'
 pod 'Crashlytics'
@@ -11,6 +10,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'AHKActionSheet'
+pod 'MBProgressHUD', '~> 0.9.2'
 
 target 'MyFavPins' do
 

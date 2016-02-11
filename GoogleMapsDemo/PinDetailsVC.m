@@ -8,6 +8,7 @@
 
 #import "PinDetailsVC.h"
 #import "AHKActionSheet.h"
+#import "MBProgressHud.h"
 
 @implementation PinDetailsVC
 
@@ -205,6 +206,10 @@
 // Compose new email to send
 - (void)composeEmail
 {
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  hud.mode = MBProgressHUDModeIndeterminate;
+  hud.labelText = @"Loading";
+  
   NSString *emailTitle = @"Check out this location";
   NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
   NSString *imgTag = [NSString stringWithFormat:@"<img src=https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@>", self.pinObject.latitude, self.pinObject.longitude];
@@ -214,6 +219,7 @@
   mc.mailComposeDelegate = self;
   [mc setSubject:emailTitle];
   [mc setMessageBody:messageBody isHTML:YES];
+  [hud hide:YES];
   
   // Present mail view controller on screen
   [self presentViewController:mc animated:YES completion:NULL];
@@ -222,6 +228,10 @@
 // Create a new FB post
 - (void)createFacebookPost
 {
+  MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  hud.mode = MBProgressHUDModeIndeterminate;
+  hud.labelText = @"Loading";
+  
   NSString *postFormatted = [NSString stringWithFormat:@"Check out this cool location: %@", self.pinObject.name];
   NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
   NSURL *staticImageURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=290x200&key=AIzaSyC0fAHwD4w0rdPBBYxJlHQIbjUOD-2v4lc&markers=%@,%@", self.pinObject.latitude, self.pinObject.longitude]];
@@ -234,6 +244,7 @@
   
   FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
   content.photos = @[fbPhoto];
+  [hud hide:YES];
   
   [FBSDKShareDialog showFromViewController:self withContent:content delegate:self];
 }
@@ -243,6 +254,10 @@
 {
   if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter])
   {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeIndeterminate;
+    hud.labelText = @"Loading";
+    
     SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
     NSString *tweetFormatted = [NSString stringWithFormat:@"Check out this cool location: %@. #MyFavPinsApp", self.pinObject.name];
     NSString *pinURL = [NSString stringWithFormat:@"http://maps.google.com/maps?q=%@,%@", self.pinObject.latitude, self.pinObject.longitude];
@@ -251,6 +266,7 @@
     [tweetSheet setInitialText:tweetFormatted];
     [tweetSheet addURL:[NSURL URLWithString:pinURL]];
     [tweetSheet addImage:mapImage];
+    [hud hide:YES];
     
     [self presentViewController:tweetSheet animated:YES completion:nil];
   }
