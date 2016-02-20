@@ -43,6 +43,13 @@
   self.locationManager.distanceFilter = kCLDistanceFilterNone;
   self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
   
+  // Setup map
+  self.mainMapView.mapType = kGMSTypeNormal;
+  self.mainMapView.myLocationEnabled = YES;
+  self.mainMapView.settings.myLocationButton = YES;
+  self.mainMapView.delegate = self;
+  [self.mainMapView setMinZoom:12 maxZoom:18];
+  
   // Address label and button stuff
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
   self.lblAddress.numberOfLines = 4;
@@ -93,15 +100,10 @@
     [self.locationManager requestWhenInUseAuthorization];
   }
   
-  self.mainMapView.mapType = kGMSTypeNormal;
-  self.mainMapView.myLocationEnabled = YES;
-  self.mainMapView.settings.myLocationButton = YES;
-  self.mainMapView.delegate = self;
-  [self.mainMapView setMinZoom:10 maxZoom:16];
-  
   // Hide text controls
   [self.mapBottomConstraint setConstant:30];
   [self.myScrollView setHidden:YES];
+  [self.lblInfo setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -313,7 +315,8 @@
   NSLog(@"Stopped updating location");
   [manager stopUpdatingLocation];
   GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:locations.firstObject.coordinate.latitude
-                                                          longitude:locations.firstObject.coordinate.longitude zoom:16 bearing:0 viewingAngle:0];
+                                                          longitude:locations.firstObject.coordinate.longitude
+                                                               zoom:18 bearing:0 viewingAngle:0];
   [self.mainMapView animateToCameraPosition:camera];
 }
 
@@ -331,7 +334,7 @@
   if (!self.viewInHalf)
   {
     // Reduce map container height
-    [self.mapBottomConstraint setConstant:self.view.frame.size.height / 2];
+    [self.mapBottomConstraint setConstant:280];
     
     // Unhide everything but the map
     self.myScrollView.hidden = NO;

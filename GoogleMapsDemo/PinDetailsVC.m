@@ -80,7 +80,7 @@
   [super viewWillAppear:animated];
   
   GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:[self.pinObject.latitude doubleValue]
-                                                          longitude:[self.pinObject.longitude doubleValue] zoom:16 bearing:0 viewingAngle:0];
+                                                          longitude:[self.pinObject.longitude doubleValue] zoom:18 bearing:0 viewingAngle:0];
   [self.mainMapView animateToCameraPosition:camera];
 
 }
@@ -132,6 +132,8 @@
       NSLog(@"%@, %@", saveError, saveError.localizedDescription);
     }
     
+    self.pinObject = [self.delegate.fetchedResultsController objectAtIndexPath:self.indexPathOfObject];
+    
     alertView = [[FUIAlertView alloc] initWithTitle:@"Success"
                                             message:@"Changes successfully saved."
                                            delegate:nil
@@ -171,6 +173,7 @@
 // Hide keyboard when user taps something
 -(void)dismissKeyboard
 {
+  [self.txtPinName setText:self.pinObject.name];
   [self.txtPinName resignFirstResponder];
 }
 
@@ -183,6 +186,9 @@
 // Show ActionSheet of share options
 - (void)sharePin
 {
+  // Hide keyboard if showing
+  [self dismissKeyboard];
+  
   AHKActionSheet *actionSheet = [[AHKActionSheet alloc] initWithTitle:@"Share via"];
   
   [actionSheet addButtonWithTitle:@"Email" image:[UIImage imageNamed:@"EmailIcon"] type:AHKActionSheetButtonTypeDefault handler:^(AHKActionSheet *as) {
@@ -268,7 +274,7 @@
   else
   {
     FUIAlertView *alertView = [[FUIAlertView alloc] initWithTitle:@"Twitter Login"
-                                                          message:@"Please login to Twitter on your phone first, then try again."
+                                                          message:@"Please login to Twitter on your device first, then try again."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
