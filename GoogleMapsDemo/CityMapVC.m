@@ -303,8 +303,13 @@
     self.viewInHalf = NO;
     self.lblInfo.hidden = NO;
 
-    // Increase map container height
+    // Increase map container height (via animation)
     [self.mapBottomConstraint setConstant:30];
+    [self.view setNeedsUpdateConstraints];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+      [self.view layoutIfNeeded];
+    }];
     
     NSLog(@"Pin added to set.");
   }
@@ -351,8 +356,13 @@
   self.viewInHalf = NO;
   self.lblInfo.hidden = NO;
   
-  // Increase map container height
+  // Increase map container height (via animation)
   [self.mapBottomConstraint setConstant:30];
+  [self.view setNeedsUpdateConstraints];
+  
+  [UIView animateWithDuration:0.25f animations:^{
+    [self.view layoutIfNeeded];
+  }];
 }
 
 #pragma mark - CLLocationManagerDelegate methods
@@ -391,6 +401,11 @@
   {
     // Reduce map container height
     [self.mapBottomConstraint setConstant:280];
+    [self.view setNeedsUpdateConstraints];
+    
+    [UIView animateWithDuration:0.25f animations:^{
+      [self.view layoutIfNeeded];
+    }];
     
     // Unhide everything but the map
     self.myScrollView.hidden = NO;
