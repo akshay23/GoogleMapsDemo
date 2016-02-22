@@ -54,6 +54,13 @@
   self.lblAddress.lineBreakMode = NSLineBreakByWordWrapping;
   self.lblAddress.numberOfLines = 4;
   
+  // Button and text box setup
+  [self.txtPinName setFont:[UIFont flatFontOfSize:15]];
+  [self.txtPinName setBackgroundColor:[UIColor clearColor]];
+  [self.txtPinName.layer setCornerRadius:2.0];
+  [self.txtPinName.layer setBorderWidth:1.0];
+  [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
+  
   [self.btnSavePin setShadowHeight:4.0f];
   [self.btnSavePin setButtonColor:[UIColor peterRiverColor]];
   [self.btnSavePin setShadowColor:[UIColor belizeHoleColor]];
@@ -72,10 +79,6 @@
   self.appDelegate = [[UIApplication sharedApplication] delegate];
   self.managedObjectContext = [self.appDelegate managedObjectContext];
   
-  // Add action for Done button
-  [self.txtPinName setFont:[UIFont flatFontOfSize:15]];
-  [self.txtPinName addTarget:self action:@selector(textFieldFinished:) forControlEvents:UIControlEventEditingDidEndOnExit];
-  
   // Gesture recognizer to hide keyboard
   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
   [self.view addGestureRecognizer:tap];
@@ -89,6 +92,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+  [super viewWillAppear:animated];
+
   CLAuthorizationStatus authorizationStatus= [CLLocationManager authorizationStatus];
   if (authorizationStatus == kCLAuthorizationStatusAuthorizedAlways ||
       authorizationStatus == kCLAuthorizationStatusAuthorizedWhenInUse)
@@ -104,6 +109,15 @@
   [self.mapBottomConstraint setConstant:30];
   [self.myScrollView setHidden:YES];
   [self.lblInfo setHidden:NO];
+  
+  [self registerForKeyboardNotifications];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [self deregisterFromKeyboardNotifications];
+  
+  [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,12 +154,6 @@
   [infoWindow addSubview:snippet];
   
   return infoWindow;
-}
-
-// Move scrollview up
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-  self.myScrollView.contentOffset = CGPointMake(0, textField.frame.origin.y);
 }
 
 // Hide keyboard when 'Done' is tapped
@@ -200,6 +208,54 @@
     NSLog(@"Unable to save new pin.");
     NSLog(@"%@, %@", error, error.localizedDescription);
   }
+}
+
+- (void)keyboardWasShown:(NSNotification *)notification
+{
+  NSDictionary* info = [notification userInfo];
+  CGSize keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+  
+  [self.mapBottomConstraint setConstant:self.mapBottomConstraint.constant + (keyboardSize.height - 220)];
+  [self.view setNeedsUpdateConstraints];
+  
+  [UIView animateWithDuration:0.25f animations:^{
+    [self.view layoutIfNeeded];
+  }];
+}
+
+- (void)keyboardWillBeHidden:(NSNotification *)notification
+{
+  [self.mapBottomConstraint setConstant:280];
+  [self.view setNeedsUpdateConstraints];
+  
+  [UIView animateWithDuration:0.25f animations:^{
+    [self.view layoutIfNeeded];
+  }];
+
+}
+
+- (void)registerForKeyboardNotifications
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWasShown:)
+                                               name:UIKeyboardWillShowNotification
+                                             object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(keyboardWillBeHidden:)
+                                               name:UIKeyboardWillHideNotification
+                                             object:nil];
+}
+
+- (void)deregisterFromKeyboardNotifications
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UIKeyboardWillShowNotification
+                                                object:nil];
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UIKeyboardWillHideNotification
+                                                object:nil];
 }
 
 #pragma mark - IBActions
